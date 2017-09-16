@@ -1,18 +1,11 @@
 $(function(){
-  // var url = '/game.php';
   
   doRequest('state');
-  /*$.ajax({
-    url: url+'?action=state',
-  }).done(function( responce ) {
-    var data = $.parseJSON(responce);
-    
-    renderGame(data.matrix);
-    $('#count_moves').text(data.count_moves);
-  });*/
-   
-
+  
 });
+
+var audio = new Audio('/sounds/click.wav');
+
 
 function newGame() {
   doRequest('start');
@@ -20,6 +13,7 @@ function newGame() {
 
 function doMove(number) {
   doRequest('move', number);
+  audio.play();
 }
    
 function doRequest(action, value='') {
