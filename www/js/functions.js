@@ -1,5 +1,5 @@
 $(function(){
-  
+  window.gameCounter = new flipCounter('flip-counter', {value:0000, inc:1, auto:false});
   doRequest('state');
   
 });
@@ -11,9 +11,9 @@ function newGame() {
   doRequest('start');
 }
 
-function doMove(number) {
+function doMove(gameCounter, number) {
   doRequest('move', number);
-  audio.play();
+  
 }
    
 function doRequest(action, value='') {
@@ -23,7 +23,15 @@ function doRequest(action, value='') {
     var data = JSON.parse(responce);
     
     renderGame(data.matrix);
-    $('#count_moves').text(data.count_moves);
+    console.log($('#count_moves').text());
+    console.log(data.count_moves);
+    
+    if (window.gameCounter.getValue() !== data.count_moves) {
+      gameCounter.add(1);
+  audio.play();
+    }
+    window.gameCounter.setValue(data.count_moves);
+    // $('#count_moves').text(data.count_moves);
   });
 }
    
