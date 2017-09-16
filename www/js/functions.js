@@ -6,14 +6,12 @@ $(function(){
 
 var audio = new Audio('/sounds/click.wav');
 
-
 function newGame() {
   doRequest('start');
 }
 
 function doMove(gameCounter, number) {
   doRequest('move', number);
-  
 }
    
 function doRequest(action, value='') {
@@ -23,15 +21,17 @@ function doRequest(action, value='') {
     var data = JSON.parse(responce);
     
     renderGame(data.matrix);
-    console.log($('#count_moves').text());
-    console.log(data.count_moves);
     
     if (window.gameCounter.getValue() !== data.count_moves) {
       gameCounter.add(1);
-  audio.play();
+      audio.play();
     }
     window.gameCounter.setValue(data.count_moves);
-    // $('#count_moves').text(data.count_moves);
+    
+    if (data.status == 'finished') {
+      $('#modalSave').modal('show');
+    }
+    
   });
 }
    
@@ -43,4 +43,10 @@ function renderGame(data) {
       $("#cell-"+val).removeClass('lightOn');
     }
   });
+}
+
+function saveWinner() {
+  var name = $('#player_name').val();
+  doRequest('save', name);
+  document.location = '/top.php';
 }

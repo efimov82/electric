@@ -21,7 +21,8 @@ if (!isset($_GET['action'])) {
 
 $sesion = 'electric_game';
 $game = new ElectricGame(isset($_SESSION[$sesion]) ? $_SESSION[$sesion] : []);
-
+$game->setRandomMagic(false);
+  
 if (!isset($_SESSION[$sesion])) {
   $game->start();
 }
