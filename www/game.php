@@ -8,9 +8,11 @@
 *   move=N [1-25] make new move
  *  save=name - save result game 
  */
+session_start();
 
+$sesion = 'electric_game';
+$game = new ElectricGame($_SESSION[$sesion]);
 
-$game = new ElectricGame();
 if (!isset($GET['action']) || !method_exists($game, $GET['action'])) {
   die('bag action');
 }
@@ -22,4 +24,7 @@ $data['matrix'] = $game->getMatrix();
 $data['status'] = $game->getStatus();
 $data['time'] = $game->getTime();
 
+$game->saveInSession($sesion);
+
 json_encode($data);
+
