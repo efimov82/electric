@@ -46,17 +46,11 @@
 <div class="container">
     <h2>Rules</h2>
 
-
-
-
-
-
-
     <div class="textPage"><p>The game takes place on a field of 5x5 cells, where each cell represents a "light bulb".</p>
-<p>A light bulb can have two states: "On" or "Off". The "electrician" (i.e. the player) by
-clicking on any cell takes it to the "On" state, while all nearby light bulbs (including diagonal ones)
-change their current state to the opposite one.</p>
-
+      <p>A light bulb can have two states: "On" or "Off". The "electrician" (i.e. the player)</p>
+      <p>by clicking on any cell takes it to the "On" state, while all nearby light bulbs (including diagonal ones)</p>
+      <p>change their current state to the opposite one.</p>
+      <br/>
 <p><strong>Purpose of the game:</strong></p>
 Do so that all the light bulbs burn simultaneously for the minimum number of moves.</div>
 </body>
