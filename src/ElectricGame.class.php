@@ -3,11 +3,11 @@ namespace src;
 
 /**
  * Class for game logic
- * 
+ *
  * @author Dan Efimov <efimov82@gmail.com>
  */
 class ElectricGame {
-  
+
   protected $timeStart = 0;
   protected $timeFinish = 0;
   protected $countMoves = 0;
@@ -44,8 +44,8 @@ class ElectricGame {
   ];
 
   function __construct($data) {
-    if (isset($data['matrix']) && 
-        isset($data['timeStart']) && 
+    if (isset($data['matrix']) &&
+        isset($data['timeStart']) &&
         isset($data['countMoves'])) {
           $this->matrix = $data['matrix'];
           $this->timeStart = $data['timeStart'];
@@ -58,7 +58,7 @@ class ElectricGame {
    *
    * @return void
    */
-  public function new() {
+  public function start() {
     $this->matrix = [];
     for($i = 1; $i <= $this->matrixSize; $i++) {
       $this->matrix[$i] = false;
@@ -131,11 +131,11 @@ public function setRandomMagic($val) {
       $this->applyMagicToMatrix();
       $this->countMoves++;
     }
-    
+
     if ($this->isGameFinish())
       $this->timeFinish = time();
 
-    return $res;  
+    return $res;
   }
 
 /**
@@ -172,5 +172,5 @@ public function setRandomMagic($val) {
       $this->matrix[$index] = false;
     }
   }
-  
+
 }
