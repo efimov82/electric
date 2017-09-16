@@ -1,0 +1,29 @@
+.gameField {
+  background-color:#cccccc;
+  border: 2 solid darkblue;
+}
+
+.gameCell {
+  background-color: darkcyan;
+  border: 1 solid darkblue;
+  border-radius: 3px;
+  padding: 2px;
+  margin: 2px;
+  width:30%;
+  width:30%;
+  background-image: url('../images/lamp_off.png');
+  background-repeat: no-repeat;
+}
+
+.lightOn {
+  background-image: url('../images/lamp.png');
+  background-repeat: no-repeat;
+}
+
+.square { 
+border: 5px solid red;
+position: relative;
+text-align: center;
+width: 50vw;
+height: 50vw;
+}

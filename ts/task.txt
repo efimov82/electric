@@ -1,0 +1,21 @@
+Task: 
+Create simple table game 'Electric'
+
+Description:
+The game takes place on a field of 5x5 cells, where each cell represents a "light bulb". 
+The "light bulb" can have two states: "On" and "Off". The "electrician" (ie the player) by 
+clicking on any cell "lightbulb" takes it to the "ON" state, while all nearby "bulbs"
+ (including diagonal ones) change their current state to the opposite one. 
+For additional complexity, after each move with a chance of 1 to 25, one light bulb can go out (state OFF).
+
+Purpose of the game:
+Do so that all the light bulbs burn simultaneously for the minimum number of moves.
+
+Winnings:
+If the "electrician" coped with the task, then a dialog box appears where he is shown 
+his number of moves and suggests entering a name. 
+By clicking on "OK", its name and result is saved in the results table.
+
+TOP10
+Make a button, by clicking on which, a dialog box appears with a list of the top 10 plaes 
+who have mastered the minimum number of moves.
