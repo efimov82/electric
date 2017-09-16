@@ -6,31 +6,60 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="css/style.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-
+  
   <!-- Latest compiled and minified JavaScript -->
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+  <script src="/js/functions.js"></script>
 </head>
 
 <body>
 
   <div id="game">
-    <div id="gameCells" class="mx-auto gameCells">
+    <div id="gameCells" class="container gameField">
       <div class="row">
-        <div class="col-xs-1 gameCell">.col-xs-6 .col-md-4</div>
-        <div class="col-xs-1 gameCell">.col-xs-6 .col-md-4</div>
-        <div class="col-xs-1  gameCell lightOn">.col-xs-6 .col-xs-6 .col-md-4</div>
-        <div class="col-xs-1 square">.col-xs-6 .col-md-4</div>
-        <div class="col-xs-1 square gameCell">.col-xs-6 .col-md-4</div>
+        <div id="cell-1" class="col-xs-1 gameCell" onclick="doMove(1)"></div>
+        <div id="cell-2" class="col-xs-1 gameCell" onclick="doMove(2)"></div>
+        <div id="cell-3" class="col-xs-1 gameCell" onclick="doMove(3)"></div>
+        <div id="cell-4" class="col-xs-1 gameCell" onclick="doMove(4)"></div>
+        <div id="cell-5" class="col-xs-1 gameCell" onclick="doMove(5)"></div>
       </div>
 
       <div class="row">
-        <div class="col-xs-6 col-md-4 gameCell">.col-xs-6 .col-md-4</div>
-        <div class="col-xs-6 col-md-4 gameCell">.col-xs-6 .col-md-4</div>
-        <div class="col-xs-6 col-md-4 gameCell">.col-xs-6 .col-md-4</div>
-        <div class="col-xs-6 col-md-4 gameCell">.col-xs-6 .col-md-4</div>
-        <div class="col-xs-6 col-md-4 gameCell">.col-xs-6 .col-md-4</div>
+        <div id="cell-6" class="col-xs-1 gameCell" onclick="doMove(6)"></div>
+        <div id="cell-7" class="col-xs-1 gameCell" onclick="doMove(7)"></div>
+        <div id="cell-8" class="col-xs-1 gameCell" onclick="doMove(8)"></div>
+        <div id="cell-9" class="col-xs-1 gameCell" onclick="doMove(9)"></div>
+        <div id="cell-10" class="col-xs-1 gameCell" onclick="doMove(10)"></div>
       </div>
+      
+      <div class="row">
+        <div id="cell-11" class="col-xs-1 gameCell" onclick="doMove(11)"></div>
+        <div id="cell-12" class="col-xs-1 gameCell" onclick="doMove(12)"></div>
+        <div id="cell-13" class="col-xs-1 gameCell" onclick="doMove(13)"></div>
+        <div id="cell-14" class="col-xs-1 gameCell" onclick="doMove(14)"></div>
+        <div id="cell-15" class="col-xs-1 gameCell" onclick="doMove(15)"></div>
+      </div>
+      
+      <div class="row">
+        <div id="cell-16" class="col-xs-1 gameCell" onclick="doMove(16)"></div>
+        <div id="cell-17" class="col-xs-1 gameCell" onclick="doMove(17)"></div>
+        <div id="cell-18" class="col-xs-1 gameCell" onclick="doMove(18)"></div>
+        <div id="cell-19" class="col-xs-1 gameCell" onclick="doMove(19)"></div>
+        <div id="cell-20" class="col-xs-1 gameCell" onclick="doMove(20)"></div>
+      </div>
+      
+      <div class="row">
+        <div id="cell-21" class="col-xs-1 gameCell" onclick="doMove(21)"></div>
+        <div id="cell-22" class="col-xs-1 gameCell" onclick="doMove(22)"></div>
+        <div id="cell-23" class="col-xs-1 gameCell" onclick="doMove(23)"></div>
+        <div id="cell-24" class="col-xs-1 gameCell" onclick="doMove(24)"></div>
+        <div id="cell-25" class="col-xs-1 gameCell" onclick="doMove(25)"></div>
+      </div>
+      
+      Count moves: <div id="count_moves"></div>
+      <button onclick="newGame()">New game</button>
     </div>
   </div>
 </body>

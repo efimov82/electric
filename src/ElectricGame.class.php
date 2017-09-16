@@ -44,13 +44,14 @@ class ElectricGame {
   ];
 
   function __construct($data) {
-    if (isset($data['matrix']) &&
-        isset($data['timeStart']) &&
-        isset($data['countMoves'])) {
-          $this->matrix = $data['matrix'];
-          $this->timeStart = $data['timeStart'];
-          $this->countMoves = $data['countMoves'];
-        }
+    //print_r($data);
+    if (isset($data['matrix']) && isset($data['status']) &&
+        isset($data['count_moves']) && isset($data['time_start']))
+    {
+      $this->matrix = $data['matrix'];
+      $this->timeStart = $data['time_start'];
+      $this->countMoves = $data['count_moves'];
+    }
   }
 
   /**
@@ -67,6 +68,10 @@ class ElectricGame {
     $this->timeStart = time();
     $this->timeFinish = 0;
     $this->countMoves = 0;
+  }
+
+  public function state() {
+    return true;
   }
 
   /**
@@ -110,6 +115,33 @@ public function isGameStart() {
     }
 
     return true;
+  }
+
+  public function getTimeStart() {
+    return $this->timeStart;
+  }
+  /**
+   * Get time game from start for open game or time play for finished game
+   *
+   * @return int
+   */
+  public function getTime() {
+    if ($this->isGameStart()) {
+      return time() - $this->timeStart;
+    } elseif ($this->isGameFinish()) {
+      return $this->timeFinish - $this->timeStart;
+    } else {
+      return 0;
+    }
+  }
+
+  public function getStatus() {
+    if ($this->isGameFinish())
+      return 'finished';
+    if ($this->isGameStart())
+      return 'proccess';
+
+    return 'empty';
   }
 
   public function getCountMoves() {
@@ -166,7 +198,7 @@ public function setRandomMagic($val) {
     if (!$this->randomMagic)
       return;
 
-    $index = rand(0,$this->matrixSize);
+    $index = rand(1,$this->matrixSize);
 
     if (rand(0, 1) && $this->matrix[$index]) {
       $this->matrix[$index] = false;
