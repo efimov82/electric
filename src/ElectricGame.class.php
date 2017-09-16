@@ -11,8 +11,16 @@ class ElectricGame {
   protected $timeStart = 0;
   protected $timeFinish = 0;
   protected $countMoves = 0;
+  /**
+   * Flag for add random change Lamp in game
+   *
+   * @var bool
+   */
   protected $randomMagic = true;
-
+  /**
+   * Size matrix game 5x5
+   * @var integer
+   */
   protected $matrixSize = 25;
   protected $matrix = [];
   protected $gameFields = [
@@ -44,7 +52,6 @@ class ElectricGame {
   ];
 
   function __construct($data) {
-    //print_r($data);
     if (isset($data['matrix']) && isset($data['status']) &&
         isset($data['count_moves']) && isset($data['time_start']))
     {
@@ -160,7 +167,7 @@ public function setRandomMagic($val) {
   protected function move($move) {
     $res = $this->applyMoveToMatrix($move);
     if ($res) {
-      $this->applyMagicToMatrix();
+      $this->applyMagicToMatrix($move);
       $this->countMoves++;
     }
 
@@ -194,11 +201,14 @@ public function setRandomMagic($val) {
    *
    * @return void
    */
-  protected function applyMagicToMatrix() {
+  protected function applyMagicToMatrix($move) {
     if (!$this->randomMagic)
       return;
 
     $index = rand(1,$this->matrixSize);
+    // not apply for current move
+    if ($index == $move)
+      return;
 
     if (rand(0, 1) && $this->matrix[$index]) {
       $this->matrix[$index] = false;

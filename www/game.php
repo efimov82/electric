@@ -6,8 +6,8 @@
  * action:
  *  start - start new game
  *  state - current game data
-*   move [1-25] make new move
- *  save=name - save result game
+*   move [1-25] take new move
+ *  save - save result game
  */
 session_start();
 
@@ -18,10 +18,13 @@ if (!isset($_GET['action'])) {
   die('bag action');
 }
 
-//print_r($_SESSION);
 
 $sesion = 'electric_game';
 $game = new ElectricGame(isset($_SESSION[$sesion]) ? $_SESSION[$sesion] : []);
+
+if (!isset($_SESSION[$sesion])) {
+  $game->start();
+}
 
 $action = $_GET['action'];
 switch ($action) {
@@ -34,8 +37,10 @@ switch ($action) {
     }
     break;
   case 'save':
-    // TODO
-
+    if (isset($_GET['value'])) {
+      $game->save($_GET['value']);
+      $game->start();
+    }
 }
 
 $data['count_moves'] = $game->getCountMoves();
