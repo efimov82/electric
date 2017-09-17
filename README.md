@@ -1,4 +1,4 @@
-# electric
+# Electric
 Simple game "Electric"
 
 Rules
@@ -15,7 +15,27 @@ Do so that all the light bulbs burn simultaneously for the minimum number of mov
 Live demo:
 http://electric.kapkap.info
 
-Run tests
+Install:
+
+Run command
+
+```composer install```
+
+Edit file ```config/database.php```
+
+Create Database and run SQL:
+```
+CREATE TABLE `users_results` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  `date_create` timestamp NULL DEFAULT NULL,
+  `scores` int(11) DEFAULT NULL,
+  `time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+```
+
+Run tests:
 ```
 php ./tests/testElectricGame.php
 ```
