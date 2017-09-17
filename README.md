@@ -36,6 +36,6 @@ CREATE TABLE `users_results` (
 ```
 
 Test:
-
+```
 php ./tests/testElectricGame.php
 ```
