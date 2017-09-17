@@ -1,7 +1,9 @@
 # Electric
 Simple game "Electric"
 
-Rules
+![Alt text](ts/game_play.png?raw=true "Game play")
+
+Game rules:
 The game takes place on a field of 5x5 cells, where each cell represents a "light bulb".
 
 A light bulb can have two states: "On" or "Off". The "electrician" (i.e. the player) 
