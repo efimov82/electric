@@ -7,20 +7,20 @@
   margin: 2px;
   min-width: 100px;
   height: 100px;
-  background-image: url('../images/lamp_off.png');
+  background-image: url('../img/lamp_off.png');
   background-repeat: no-repeat;
 }
 
 .lightOn {
-  background-image: url('../images/lamp.png');
+  background-image: url('../img/lamp.png');
   background-repeat: no-repeat;
   animation: showOnAnimation 1.5s ease-out normal;
 }
 
 .textPage{
-  // font-family: '';
   font-size: 18px;
 }
+
 @keyframes showOnAnimation {
   0% {
     opacity: 0;
