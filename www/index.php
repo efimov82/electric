@@ -1,33 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <title>Electric</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="css/style.css?v=3" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-  
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-  <script src="/js/functions.js?v=2"></script>
-  <!-- My flip counter script, REQUIRED -->
-	<script type="text/javascript" src="/js/flipcounter.min.js"></script>
-	<!-- Style sheet for the counter, REQUIRED -->
-	<link rel="stylesheet" type="text/css" href="/css/counter.css" />
-  <!-- Global Site Tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-106534993-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments)};
-  gtag('js', new Date());
-
-  gtag('config', 'UA-106534993-1');
-</script>
-
-</head>
-
+  <?php include '_html/header.html'; ?>
 <body>
 
   <nav class="navbar navbar-default">
@@ -42,7 +16,7 @@
     </ul>
   </div>
 </nav>
-  
+
 <div class="container">
   <div id="game">
     <div id="gameCells" class="container gameField">
@@ -61,7 +35,7 @@
         <div id="cell-9" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 9)"></div>
         <div id="cell-10" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 10)"></div>
       </div>
-      
+
       <div class="row">
         <div id="cell-11" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 11)"></div>
         <div id="cell-12" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 12)"></div>
@@ -69,7 +43,7 @@
         <div id="cell-14" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 14)"></div>
         <div id="cell-15" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 15)"></div>
       </div>
-      
+
       <div class="row">
         <div id="cell-16" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 16)"></div>
         <div id="cell-17" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 17)"></div>
@@ -77,7 +51,7 @@
         <div id="cell-19" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 19)"></div>
         <div id="cell-20" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 20)"></div>
       </div>
-      
+
       <div class="row">
         <div id="cell-21" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 21)"></div>
         <div id="cell-22" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 22)"></div>
@@ -85,16 +59,16 @@
         <div id="cell-24" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 24)"></div>
         <div id="cell-25" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 25)"></div>
       </div>
-      
+
       <div>
       <div id="flip-counter" class="flip-counter"></div>
-      </div> 
+      </div>
       <button class="btn" onclick="newGame()">New game</button>
     </div>
   </div>
   </div>
-  
-  
+
+
     <div id="modalSave" class="modal fade">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -104,7 +78,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        
+
         <div class="modal-body">
           <p>Congratulation! You did it! Tell your name to save in TOP10.</p>
           <input id="player_name" type="input" />

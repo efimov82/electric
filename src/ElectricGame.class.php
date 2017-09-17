@@ -101,8 +101,7 @@ class ElectricGame {
     if (!$this->isGameFinish())
       return false;
 
-
-    //$data['time'] = time() - $this->timeStart;
+    $data['time'] = $this->getTime();
     $data['name'] = htmlspecialchars($name);
     $data['date_create'] = date('Y-m-d H:i:s', time());
     $data['scores'] = $this->getCountMoves();

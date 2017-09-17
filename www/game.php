@@ -21,7 +21,9 @@ if (!isset($_GET['action'])) {
 
 
 $sesion = 'electric_game';
-$game = new ElectricGame(isset($_SESSION[$sesion]) ? $_SESSION[$sesion] : []);
+$gameData = isset($_SESSION[$sesion]) ? $_SESSION[$sesion] : [];
+
+$game = new ElectricGame($gameData);
 $game->setRandomMagic(false);
 
 if (!isset($_SESSION[$sesion])) {
@@ -41,15 +43,17 @@ switch ($action) {
   case 'save':
     if (isset($_GET['value'])) {
       $game->save($db, $_GET['value']);
+      // save name for next win game
+      $gameData['player_name'] = $_GET['value'];
       $game->start();
     }
 }
 
-$data['count_moves'] = $game->getCountMoves();
-$data['matrix'] = $game->getMatrix();
-$data['status'] = $game->getStatus();
-$data['time_start'] = $game->getTimeStart();
+$gameData['count_moves'] = $game->getCountMoves();
+$gameData['matrix'] = $game->getMatrix();
+$gameData['status'] = $game->getStatus();
+$gameData['time_start'] = $game->getTimeStart();
 
-$_SESSION[$sesion] = $data;
+$_SESSION[$sesion] = $gameData;
 
-echo (json_encode($data));
+echo (json_encode($gameData));

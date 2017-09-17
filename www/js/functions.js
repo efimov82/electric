@@ -1,5 +1,5 @@
 $(function(){
-  window.gameCounter = new flipCounter('flip-counter', {value:0000, inc:1, auto:false});
+  window.gameCounter = new flipCounter('flip-counter', {value:0000, auto:false});
   doRequest('state');
   
 });
@@ -29,6 +29,7 @@ function doRequest(action, value='') {
     window.gameCounter.setValue(data.count_moves);
     
     if (data.status == 'finished') {
+      $('#player_name').val(data.player_name);
       $('#modalSave').modal('show');
     }
     
