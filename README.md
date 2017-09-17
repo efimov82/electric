@@ -1,6 +1,7 @@
 # Electric
 Simple game "Electric"
 
+![Alt text](/efimov82/electric/ts/game_play.png?raw=true "Game play")
 Rules
 The game takes place on a field of 5x5 cells, where each cell represents a "light bulb".
 
