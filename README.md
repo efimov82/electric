@@ -18,9 +18,11 @@ http://electric.kapkap.info
 Install:
 
 Run command
+
 ```composer install```
 
 Edit file ```config/database.php```
+
 Create Database and run SQL:
 ```
 CREATE TABLE `users_results` (
