@@ -11,6 +11,7 @@
  */
 session_start();
 
+require_once "../bootstrap.php";
 include '../src/ElectricGame.class.php';
 use src\ElectricGame;
 
@@ -22,7 +23,7 @@ if (!isset($_GET['action'])) {
 $sesion = 'electric_game';
 $game = new ElectricGame(isset($_SESSION[$sesion]) ? $_SESSION[$sesion] : []);
 $game->setRandomMagic(false);
-  
+
 if (!isset($_SESSION[$sesion])) {
   $game->start();
 }
@@ -39,7 +40,7 @@ switch ($action) {
     break;
   case 'save':
     if (isset($_GET['value'])) {
-      $game->save($_GET['value']);
+      $game->save($db, $_GET['value']);
       $game->start();
     }
 }

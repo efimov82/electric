@@ -97,10 +97,17 @@ class ElectricGame {
     return false;
   }
 
-  public function save($params) {
-    // TODO save to DB {date, name, countMoves, time}
-    $time = time() - $this->timeStart;
+  public function save($db, $name) {
+    if (!$this->isGameFinish())
+      return false;
 
+
+    //$data['time'] = time() - $this->timeStart;
+    $data['name'] = htmlspecialchars($name);
+    $data['date_create'] = date('Y-m-d H:i:s', time());
+    $data['scores'] = $this->getCountMoves();
+
+    $db->insert(TBL_USERS_RESULTS, $data);
     return true;
   }
 

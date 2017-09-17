@@ -16,7 +16,7 @@
 	<script type="text/javascript" src="/js/flipcounter.min.js"></script>
 	<!-- Style sheet for the counter, REQUIRED -->
 	<link rel="stylesheet" type="text/css" href="/css/counter.css" />
-  
+
   <!-- Global Site Tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-106534993-1"></script>
   <script>
@@ -51,7 +51,7 @@
       <thead>
         <tr>
           <th>Name</th>
-          <th>Counts</th>
+          <th>Count Moves</th>
           <th>Date</th>
         </tr>
       </thead>
