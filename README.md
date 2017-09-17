@@ -33,6 +33,7 @@ CREATE TABLE `users_results` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 ```
 
+Test:
 
 php ./tests/testElectricGame.php
 ```
