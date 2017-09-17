@@ -39,3 +39,16 @@ Run tests:
 ```
 php ./tests/testElectricGame.php
 ```
+
+TODO List:
+
+Add game helper tools:
+1. Freeze - can be apply to one light bulb. Frozen light bulb not change state in next one move.
+
+2. OFF - can be apply to one light bulb in state "On" without change states light bulbs around.
+
+Game play:
+
+Add different size of playfield
+
+Add variants of game fields with obstacles

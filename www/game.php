@@ -24,10 +24,10 @@ $sesion = 'electric_game';
 $gameData = isset($_SESSION[$sesion]) ? $_SESSION[$sesion] : [];
 
 $game = new ElectricGame($gameData);
-$game->setRandomMagic(false);
+// $game->setRandomMagic(false);
 
 if (!isset($_SESSION[$sesion])) {
-  $game->start();
+  $game->start(GAME_LEVEL_SIMPLE);
 }
 
 $action = $_GET['action'];
