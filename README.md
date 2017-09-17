@@ -42,6 +42,7 @@ Run tests:
 php ./tests/testElectricGame.php
 ```
 
+
 TODO List:
 
 Add game helper tools:
@@ -51,6 +52,10 @@ Add game helper tools:
 
 Game play:
 
-Add different size of playfield
+Add different size of play fields
 
 Add variants of game fields with obstacles
+
+Add countdown timer and limit time for games
+
+Add difficult levels
