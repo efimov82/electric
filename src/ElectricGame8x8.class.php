@@ -17,6 +17,7 @@ class ElectricGame8x8 extends AbstractGame {
    */
   protected $gameLabel = '8x8';
   protected $matrixSize = 64;
+  protected $matrixLen = 8;
   protected $supportActions = ['move', 'freeze', 'start', 'save', 'vline', 'gline', 'cross', 'diagonal'];
   protected $costsMove = ['freeze'=>3, 'vline'=>4, 'gline'=>4, 'cross'=>8, 'diagonal'=>8];
   /**
@@ -40,12 +41,36 @@ class ElectricGame8x8 extends AbstractGame {
     return true;
   }
 
-  public function glineAction($param) {
+  public function glineAction($params) {
+    if (!$this->isGameStart() || $this->isGameFinish())
+      return false;
 
+    $val = $this->_getIntValue($params);
+    if (!$val || $this->matrix[$val] != LS_OFF)
+      return false;
+
+    $lamps = $this->_getLampsForGLine($val);
+    $this->_applyReverceTransform($val, $lamps);
+    $this->countMoves += $this->costsMove['vline']; // same value
+    $this->afterAction($val);
   }
 
-  public function crossAction($param) {
+  public function crossAction($params) {
+    if (!$this->isGameStart() || $this->isGameFinish())
+      return false;
 
+    $val = $this->_getIntValue($params);
+    if (!$val || $this->matrix[$val] != LS_OFF)
+      return false;
+
+    $lamps = $this->_getLampsForGLine($val);
+    $this->_applyReverceTransform($val, $lamps);
+
+    $lamps = $this->_getLampsForVLine($val);
+    $this->_applyReverceTransform($val, $lamps);
+
+    $this->countMoves += 2 * $this->costsMove['vline']; // same value
+    $this->afterAction($val);
   }
 
   public function diagonalAction($param) {
@@ -55,9 +80,18 @@ class ElectricGame8x8 extends AbstractGame {
   protected function _getLampsForVLine($val) {
     $res = [];
     for($i=1; $i <= $this->matrixSize; $i++) {
-      if (($i % 8) == ($val % 8))
+      if (($i % $this->matrixLen) == ($val % $this->matrixLen))
         $res[] = $i;
     }
+    return $res;
+  }
+
+  protected function _getLampsForGLine($val) {
+    $res = [];
+    $start = floor(($val-1) / $this->matrixLen) * $this->matrixLen + 1;
+    for($i = $start; $i < $start + $this->matrixLen; $i++)
+      $res[] = $i;
+
     return $res;
   }
 
