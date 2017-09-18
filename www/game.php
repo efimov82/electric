@@ -25,7 +25,7 @@ $sesion = 'electric_game';
 if (isset($_SESSION[$sesion])) {
   $game = new ElectricGame($_SESSION[$sesion]);
 } else {
-  $game = new ElectricGame();
+  $game = new ElectricGame([]);
   $game->start(GAME_LEVEL_NORMAL);
 }
 
