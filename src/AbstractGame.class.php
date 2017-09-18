@@ -40,7 +40,7 @@ class AbstractGame {
   protected $_importFields = ['matrix', 'countMoves', 'arrFreezed', 'timeStart', 'difficulty'];
   protected $_isInit = false;
 
-  function __construct($data) {
+  function __construct($data = []) {
 
     foreach ($this->_importFields as $key) {
       if (!isset($data[$key]))
@@ -243,7 +243,7 @@ class AbstractGame {
     if ($this->matrix[$move] != LS_OFF)
       return false;
 
-    $arr = $this->gameFields[$move];
+    $arr = $this->getLampAround($move);
 
     foreach ($arr as $i) {
 
@@ -258,6 +258,14 @@ class AbstractGame {
     return true;
   }
 
+  /**
+   * Get neable lamps
+   *
+   * @param type $number
+   */
+  protected function getLampAround($number) {
+    return $this->gameFields[$number];
+  }
   /**
    * Unfreez all lamps
    */

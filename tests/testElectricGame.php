@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Test cases for logic game
+ * Test cases for logic game 5x5
  */
 
 require_once(dirname(__FILE__) . '/../simpletest/autorun.php');
