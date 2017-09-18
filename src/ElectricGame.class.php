@@ -2,7 +2,7 @@
 
 namespace src;
 
-define('GAME_LEVEL_SIMPLE',   1); // 3 frrez
+define('GAME_LEVEL_EASY',   1); // 3 frrez
 define('GAME_LEVEL_NORMAL',   2); // 2 freez
 define('GAME_LEVEL_HARD',     3); // 1 freez
 
@@ -99,7 +99,7 @@ class ElectricGame {
    *
    * @return void
    */
-  public function start($difficulty = GAME_LEVEL_HARD) {
+  public function start($difficulty = GAME_LEVEL_NORMAL) {
     $this->matrix = [];
     for ($i = 1; $i <= $this->matrixSize; $i++) {
       $this->matrix[$i] = LS_OFF;
@@ -111,7 +111,8 @@ class ElectricGame {
     $this->countMoves = 0;
 
     // add random for start game
-    $this->matrix[rand(1,25)] = LS_ON;
+    if ($this->randomMagic)
+      $this->matrix[rand(1,25)] = LS_ON;
   }
 
   /**
@@ -154,7 +155,7 @@ class ElectricGame {
     $data['name']        = htmlspecialchars($name);
     $data['date_create'] = date('Y-m-d H:i:s', time());
     $data['scores']      = $this->getCountMoves();
-
+    $data['level']       = $this->difficulty;
     $db->insert(TBL_USERS_RESULTS, $data);
     return true;
   }
@@ -176,7 +177,7 @@ class ElectricGame {
       return false;
 
     foreach ($this->matrix as $index => $value) {
-      if ($value == LS_OFF)
+      if ($value !== LS_ON)
         return false;
     }
 

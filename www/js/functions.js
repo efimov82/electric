@@ -1,6 +1,12 @@
 $(function(){
   window.gameCounter = new flipCounter('flip-counter', {value:0000, auto:false});
-  doRequest('state');
+  var data = doRequest('state');
+  
+  
+  setInterval(function () {
+    time = parseInt($('#timePlay').text()) + 1;
+    $('#timePlay').text(time);
+  }, 1000);
   
 });
 
@@ -15,7 +21,10 @@ var LS_ON_FREEZED = 6;
 var DIFFICULTYS = {1:'EASY', 2:'NORMAL', 3:'HARD'};
 
 function newGame() {
-  doRequest('start');
+  
+  var diff = $('#game-difficulty').val();
+  doRequest('start', diff);
+  $('#modalNew').modal('hide');
 }
 
 function doMove(gameCounter, number) {

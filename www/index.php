@@ -18,69 +18,30 @@
 </nav>
 
 <div class="container">
-  <div class="row" id="game">
-    <div id="gameInfo" class="cell gameInfo">
+  <div  id="game" class="cell">
+    <div id="gameInfo" class="gameInfo">
       Difficulty: <span id="difficultyLevel">none</span>,
       Count FREEZE: <span id="countFreeze">0</span>,
       Time: <span id="timePlay">0</span>
     </div>
-    <div id="gameCells" class="cell gameField">
-      <div class="row">
-        <div id="cell-1" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 1)"></div>
-        <div id="cell-2" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 2)"></div>
-        <div id="cell-3" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 3)"></div>
-        <div id="cell-4" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 4)"></div>
-        <div id="cell-5" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 5)"></div>
-      </div>
-
-      <div class="row">
-        <div id="cell-6" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 6)"></div>
-        <div id="cell-7" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 7)"></div>
-        <div id="cell-8" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 8)"></div>
-        <div id="cell-9" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 9)"></div>
-        <div id="cell-10" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 10)"></div>
-      </div>
-
-      <div class="row">
-        <div id="cell-11" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 11)"></div>
-        <div id="cell-12" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 12)"></div>
-        <div id="cell-13" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 13)"></div>
-        <div id="cell-14" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 14)"></div>
-        <div id="cell-15" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 15)"></div>
-      </div>
-
-      <div class="row">
-        <div id="cell-16" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 16)"></div>
-        <div id="cell-17" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 17)"></div>
-        <div id="cell-18" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 18)"></div>
-        <div id="cell-19" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 19)"></div>
-        <div id="cell-20" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 20)"></div>
-      </div>
-
-      <div class="row">
-        <div id="cell-21" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 21)"></div>
-        <div id="cell-22" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 22)"></div>
-        <div id="cell-23" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 23)"></div>
-        <div id="cell-24" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 24)"></div>
-        <div id="cell-25" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 25)"></div>
-      </div>
-
-    <div>
+    <div id="gameCells" class="col-sm-10 gameField">
+      <?php include '_html/game_field.html'; ?>
       <div id="flip-counter" class="flip-counter"></div>
-      </div>
-      <button class="btn" onclick="newGame()">New game</button>
+      <button class="btn" onclick="$('#modalNew').modal('show');">New game</button>
     </div>
 
-  <div class="cell" id="tools">
-    <div class="row">
-      <button id="btnModeNormal" class="btn" onclick="setMode(this, 'normal')">Normal mode</button>
-      <button id="btnModeFreeze" class="btn" onclick="setMode(this, 'freeze')">Freeze mode</button>
+    <div class="col-sm-2 toolsPanel" id="tools">
+      <div class="row">
+        <div>TOOLS</div>
+        <button id="btnModeNormal" class="btn" onclick="setMode(this, 'normal')">Normal mode</button>
+        <button id="btnModeFreeze" class="btn" onclick="setMode(this, 'freeze')">Freeze mode</button>
+      </div>
     </div>
+
   </div>
-    </div>
 </div>
 
-
+    <!-- save game -->
     <div id="modalSave" class="modal fade">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -102,6 +63,40 @@
       </div>
     </div>
   </div>
+
+    <!-- new game -->
+    <div id="modalNew" class="modal fade">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Start new game</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <p>Choose level difficulty:
+          <select id="game-difficulty">
+            <option value="1">Easy</option>
+            <option value="2">Normal</option>
+            <option value="3">Hard</option>
+          </select>
+            </p>
+          <div>
+            <p><strong>Easy:</strong> You have 3 Freeze tool and simple gameplay.</p>
+            <p><strong>Normal:</strong> You have 2 Freeze tool and medium gameplay.</p>
+            <p><strong>Hard:</strong>You have 1 Freeze tool and medium gameplay.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="newGame()">START</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 
 </html>

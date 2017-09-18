@@ -33,6 +33,14 @@
   font-size: 18px;
 }
 
+.toolsPanel {
+  background-color: #ccccff;
+  border: 1 solid darkblue;
+  border-radius: 5px;
+  padding: 2px;
+  
+}
+
 @keyframes showOnAnimation {
   0% {
     opacity: 0;

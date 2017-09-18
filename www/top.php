@@ -22,6 +22,7 @@
       <thead>
         <tr>
           <th>Name</th>
+          <th>Level</th>
           <th>Count Moves</th>
           <th>Time</th>
           <th>Date</th>

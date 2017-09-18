@@ -19,7 +19,7 @@ if (!isset($_GET['action'])) {
   die('bag action');
 }
 
-random_int(0, 1000000);
+random_int(0, 10000);
 
 $sesion = 'electric_game';
 if (isset($_SESSION[$sesion])) {
@@ -35,7 +35,8 @@ if (isset($_SESSION[$sesion])) {
 $action = $_GET['action'];
 switch ($action) {
   case 'start':
-    $game->start();
+    if (isset($_GET['value']))
+      $game->start($_GET['value']);
     break;
   case 'move':
     if (isset($_GET['value'])) {

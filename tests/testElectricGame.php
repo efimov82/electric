@@ -30,6 +30,7 @@ class TestElectricGame extends UnitTestCase {
 
   function TestStartNewGame() {
     $game = new ElectricGame([]);
+    $game->setRandomMagic(false);
     $game->start();
 
     $matrix = $game->getMatrix();
@@ -212,7 +213,7 @@ class TestElectricGame extends UnitTestCase {
   }
 
   function TestApplyFreezeOverLimit() {
-    
+
   }
 
 
