@@ -51,8 +51,20 @@
       <p>by clicking on any cell takes it to the "On" state, while all nearby light bulbs (including diagonal ones)</p>
       <p>change their current state to the opposite one.</p>
       <br/>
-<p><strong>Purpose of the game:</strong></p>
-Do so that all the light bulbs burn simultaneously for the minimum number of moves.</div>
+      <p><strong>Purpose of the game:</strong></p>
+      <p>Do so that all the light bulbs burn simultaneously for the minimum number of moves.</p>
+
+      <p><strong>Gameplay:</strong></p>
+      <p>You can choose difficulty level of game:</p>
+      <p><strong>Easy:</strong> You have 3 Freeze tool and simple gameplay.</p>
+      <p><strong>Normal:</strong> You have 2 Freeze tool and medium gameplay.</p>
+      <p><strong>Hard:</strong>You have 1 Freeze tool and medium gameplay.</p>
+
+      <p><strong>Game Tools:</strong></p>
+      <ul>
+        <li>Freeze: freeze current state of light bulb (ON or OFF) on 1 next move.</li>
+      </ul>
+    </div>
 </body>
 
 
