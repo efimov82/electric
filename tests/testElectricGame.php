@@ -12,6 +12,10 @@ use src\ElectricGame;
 class TestElectricGame extends UnitTestCase {
 
   function TestIsNewGame() {
+
+    //echo("\n on+freez=".(LS_ON + LS_FREEZED));
+    //echo("\n off+freez=".(LS_OFF + LS_FREEZED));
+
     $game = new ElectricGame([]);
     $this->assertFalse($game->isGameStart());
   }
@@ -23,17 +27,18 @@ class TestElectricGame extends UnitTestCase {
   }
 
 
+
   function TestStartNewGame() {
     $game = new ElectricGame([]);
     $game->start();
 
     $matrix = $game->getMatrix();
     $expect = [
-      1=>false,   2=>false,   3=>false,   4=>false,
-      5=>false,   6=>false,   7=>false,   8=>false,   9=>false,
-      10=>false,  11=>false,  12=>false,  13=>false,  14=>false,
-      15=>false,  16=>false,  17=>false,  18=>false,  19=>false,
-      20=>false,  21=>false,  22=>false,  23=>false,  24=>false, 25=>false
+      1=>LS_OFF,   2=>LS_OFF,   3=>LS_OFF,   4=>LS_OFF,
+      5=>LS_OFF,   6=>LS_OFF,   7=>LS_OFF,   8=>LS_OFF,   9=>LS_OFF,
+      10=>LS_OFF,  11=>LS_OFF,  12=>LS_OFF,  13=>LS_OFF,  14=>LS_OFF,
+      15=>LS_OFF,  16=>LS_OFF,  17=>LS_OFF,  18=>LS_OFF,  19=>LS_OFF,
+      20=>LS_OFF,  21=>LS_OFF,  22=>LS_OFF,  23=>LS_OFF,  24=>LS_OFF, 25=>LS_OFF
     ];
     $this->assertEqual($matrix, $expect);
 
@@ -41,6 +46,22 @@ class TestElectricGame extends UnitTestCase {
     $this->assertEqual($game->getCountMoves(), 0);
   }
 
+  function TestIsFinishForOpenGame() {
+    $game = $this->_createTestGame();
+    $game->doMove(2);
+
+    $this->assertFalse($game->isGameFinish());
+  }
+
+  function TestIsFinishGame() {
+    $game = $this->_createTestGame();
+    $game->doMove(7);
+    $game->doMove(22);
+    $game->doMove(10);
+    $game->doMove(25);
+
+    $this->assertTrue($game->isGameFinish());
+  }
 
   function TestMoveForEmptyGame() {
     $game = new ElectricGame([]);
@@ -58,12 +79,13 @@ class TestElectricGame extends UnitTestCase {
     $matrix = $game->getMatrix();
 
     $expect = [
-      1=>true,   2=>true,   3=>false,   4=>false,   5=>false,
-      6=>true,   7=>true,   8=>false,   9=>false,   10=>false,
-      11=>false,  12=>false,  13=>false,  14=>false, 15=>false,
-      16=>false,  17=>false,  18=>false,  19=>false, 20=>false,
-      21=>false,  22=>false,  23=>false,  24=>false, 25=>false
+      1=>LS_ON,    2=>LS_ON,    3=>LS_OFF,   4=>LS_OFF,   5=>LS_OFF,
+      6=>LS_ON,    7=>LS_ON,    8=>LS_OFF,   9=>LS_OFF,   10=>LS_OFF,
+      11=>LS_OFF,  12=>LS_OFF,  13=>LS_OFF,  14=>LS_OFF, 15=>LS_OFF,
+      16=>LS_OFF,  17=>LS_OFF,  18=>LS_OFF,  19=>LS_OFF, 20=>LS_OFF,
+      21=>LS_OFF,  22=>LS_OFF,  23=>LS_OFF,  24=>LS_OFF, 25=>LS_OFF
     ];
+
     $this->assertEqual($matrix, $expect);
     $this->assertEqual($game->getCountMoves(), 1);
   }
@@ -76,11 +98,11 @@ class TestElectricGame extends UnitTestCase {
     $game->doMove(6);
     $matrix = $game->getMatrix();
     $expect = [
-      1=>true,   2=>true,   3=>false,   4=>false,   5=>false,
-      6=>true,   7=>true,   8=>false,   9=>false,   10=>false,
-      11=>false,  12=>false,  13=>false,  14=>false, 15=>false,
-      16=>false,  17=>false,  18=>false,  19=>false, 20=>false,
-      21=>false,  22=>false,  23=>false,  24=>false, 25=>false
+      1=>LS_ON,   2=>LS_ON,   3=>LS_OFF,   4=>LS_OFF,   5=>LS_OFF,
+      6=>LS_ON,   7=>LS_ON,   8=>LS_OFF,   9=>LS_OFF,   10=>LS_OFF,
+      11=>LS_OFF,  12=>LS_OFF,  13=>LS_OFF,  14=>LS_OFF, 15=>LS_OFF,
+      16=>LS_OFF,  17=>LS_OFF,  18=>LS_OFF,  19=>LS_OFF, 20=>LS_OFF,
+      21=>LS_OFF,  22=>LS_OFF,  23=>LS_OFF,  24=>LS_OFF, 25=>LS_OFF
     ];
 
     $this->assertEqual($matrix, $expect);
@@ -94,11 +116,11 @@ class TestElectricGame extends UnitTestCase {
     $game->doMove(14);
     $matrix = $game->getMatrix();
     $expect = [
-      1=>true,   2=>true,   3=>true,    4=>false,   5=>false,
-      6=>true,   7=>true,   8=>false,   9=>true,    10=>true,
-      11=>true,  12=>true,  13=>false,  14=>true,   15=>true,
-      16=>false, 17=>false, 18=>true,   19=>true,   20=>true,
-      21=>false, 22=>false, 23=>false,  24=>false,  25=>false
+      1=>LS_ON,   2=>LS_ON,   3=>LS_ON,    4=>LS_OFF,   5=>LS_OFF,
+      6=>LS_ON,   7=>LS_ON,   8=>LS_OFF,   9=>LS_ON,    10=>LS_ON,
+      11=>LS_ON,  12=>LS_ON,  13=>LS_OFF,  14=>LS_ON,   15=>LS_ON,
+      16=>LS_OFF, 17=>LS_OFF, 18=>LS_ON,   19=>LS_ON,   20=>LS_ON,
+      21=>LS_OFF, 22=>LS_OFF, 23=>LS_OFF,  24=>LS_OFF,  25=>LS_OFF
     ];
 
     $this->assertEqual($matrix, $expect);
@@ -116,11 +138,11 @@ class TestElectricGame extends UnitTestCase {
 
     $matrix = $game->getMatrix();
     $expect = [
-      1=>true,   2=>true,   3=>true,   4=>true,    5=>true,
-      6=>true,   7=>true,   8=>true,   9=>true,    10=>true,
-      11=>true,  12=>true,  13=>true,  14=>true,   15=>true,
-      16=>true, 17=>true,   18=>true,  19=>true,   20=>true,
-      21=>true, 22=>true,   23=>true,  24=>true,   25=>true
+      1=>LS_ON,   2=>LS_ON,   3=>LS_ON,   4=>LS_ON,    5=>LS_ON,
+      6=>LS_ON,   7=>LS_ON,   8=>LS_ON,   9=>LS_ON,    10=>LS_ON,
+      11=>LS_ON,  12=>LS_ON,  13=>LS_ON,  14=>LS_ON,   15=>LS_ON,
+      16=>LS_ON, 17=>LS_ON,   18=>LS_ON,  19=>LS_ON,   20=>LS_ON,
+      21=>LS_ON, 22=>LS_ON,   23=>LS_ON,  24=>LS_ON,   25=>LS_ON
     ];
 
     $this->assertEqual($matrix, $expect);
@@ -128,7 +150,77 @@ class TestElectricGame extends UnitTestCase {
     $this->assertTrue($game->isGameFinish());
   }
 
+  /*
+   * Freez
+   */
+  function TestFreezeSateOnLamp() {
+    $game = $this->_createTestGame();
 
+    $game->doMove(2);
+    $game->doFreeze(7);
+
+    $matrix = $game->getMatrix();
+    $expect = [
+      1=>LS_ON,   2=>LS_ON,             3=>LS_ON,     4=>LS_OFF,    5=>LS_OFF,
+      6=>LS_ON,   7=>LS_ON + LS_FREEZED,8=>LS_ON,     9=>LS_OFF,    10=>LS_OFF,
+      11=>LS_OFF, 12=>LS_OFF,           13=>LS_OFF,   14=>LS_OFF,   15=>LS_OFF,
+      16=>LS_OFF, 17=>LS_OFF,           18=>LS_OFF,   19=>LS_OFF,   20=>LS_OFF,
+      21=>LS_OFF, 22=>LS_OFF,           23=>LS_OFF,   24=>LS_OFF,   25=>LS_OFF
+    ];
+
+    $this->assertEqual($matrix, $expect);
+    $this->assertEqual($game->getCountMoves(), 1 + $game->getCostsMove()['freeze']);
+  }
+
+  function TestFreezeOnFreezedLamp() {
+    $game = $this->_createTestGame();
+
+    $game->doMove(2);
+    $game->doFreeze(7);
+    $game->doFreeze(7);
+
+    $matrix = $game->getMatrix();
+    $expect = [
+      1=>LS_ON,   2=>LS_ON,             3=>LS_ON,     4=>LS_OFF,    5=>LS_OFF,
+      6=>LS_ON,   7=>LS_ON + LS_FREEZED,8=>LS_ON,     9=>LS_OFF,    10=>LS_OFF,
+      11=>LS_OFF, 12=>LS_OFF,           13=>LS_OFF,   14=>LS_OFF,   15=>LS_OFF,
+      16=>LS_OFF, 17=>LS_OFF,           18=>LS_OFF,   19=>LS_OFF,   20=>LS_OFF,
+      21=>LS_OFF, 22=>LS_OFF,           23=>LS_OFF,   24=>LS_OFF,   25=>LS_OFF
+    ];
+
+    $this->assertEqual($matrix, $expect);
+    $this->assertEqual($game->getCountMoves(), 1 + $game->getCostsMove()['freeze']);
+  }
+
+  function TestFreezedLampOnNextMove() {
+    $game = $this->_createTestGame();
+
+    $game->doMove(2);
+    $game->doFreeze(7);
+    $game->doMove(12);
+
+    $matrix = $game->getMatrix();
+    $expect = [
+      1=>LS_ON,   2=>LS_ON,   3=>LS_ON,   4=>LS_OFF,    5=>LS_OFF,
+      6=>LS_OFF,  7=>LS_ON,   8=>LS_OFF,  9=>LS_OFF,    10=>LS_OFF,
+      11=>LS_ON,  12=>LS_ON,  13=>LS_ON,  14=>LS_OFF,   15=>LS_OFF,
+      16=>LS_ON,  17=>LS_ON,  18=>LS_ON,  19=>LS_OFF,   20=>LS_OFF,
+      21=>LS_OFF, 22=>LS_OFF, 23=>LS_OFF, 24=>LS_OFF,   25=>LS_OFF
+    ];
+
+    $this->assertEqual($matrix, $expect);
+  }
+
+  function TestApplyFreezeOverLimit() {
+    
+  }
+
+
+  /**
+   *
+   * @param type $matrix
+   * @return ElectricGame
+   */
   function _createTestGame($matrix = []) {
     $game = new ElectricGame($matrix);
     $game->setRandomMagic(false);

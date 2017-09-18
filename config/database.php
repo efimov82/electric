@@ -6,7 +6,7 @@
 $connectionParams = array(
     'dbname' => 'electron',
     'user' => 'root',
-    'password' => '',
+    'password' => 'qwe123',
     'host' => 'localhost',
     'driver' => 'pdo_mysql',
 );

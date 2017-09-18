@@ -2,9 +2,14 @@
 
 namespace src;
 
-define('GAME_LEVEL_SIMPLE', 1);
-define('GAME_LEVEL_NORMAL', 2);
-define('GAME_LEVEL_HARD', 3);
+define('GAME_LEVEL_SIMPLE',   1); // 3 frrez
+define('GAME_LEVEL_NORMAL',   2); // 2 freez
+define('GAME_LEVEL_HARD',     3); // 1 freez
+
+// Lamp states
+define('LS_OFF',      1);
+define('LS_ON',       2);
+define('LS_FREEZED',  4);
 
 /**
  * Class for game logic
@@ -13,10 +18,14 @@ define('GAME_LEVEL_HARD', 3);
  */
 class ElectricGame {
 
-  protected $timeStart   = 0;
-  protected $timeFinish  = 0;
-  protected $countMoves  = 0;
-  protected $difficulty  = 3;
+  protected $timeStart  = 0;
+  protected $timeFinish = 0;
+  protected $countMoves = 0;
+  protected $difficulty = 1;
+  protected $costsMove = ['freeze'=>3];
+  protected $arrFreezed = [];
+
+
   /**
    * Flag for add random change Lamp in game
    *
@@ -28,9 +37,9 @@ class ElectricGame {
    * Size matrix game 5x5
    * @var integer
    */
-  protected $matrixSize  = 25;
-  protected $matrix      = [];
-  protected $gameFields  = [
+  protected $matrixSize = 25;
+  protected $matrix     = [];
+  protected $gameFields = [
       1  => [2, 6, 7],
       2  => [1, 6, 7, 8, 3],
       3  => [2, 7, 8, 9, 4],
@@ -58,32 +67,52 @@ class ElectricGame {
       25 => [19, 20, 24]
   ];
 
+  protected $_importFields = ['matrix', 'countMoves', 'arrFreezed', 'timeStart', 'difficulty'];
+  protected $_isInit = false;
+
   function __construct($data) {
-    if (isset($data['matrix']) && isset($data['status']) &&
-      isset($data['count_moves']) && isset($data['time_start'])) {
-      $this->matrix     = $data['matrix'];
-      $this->timeStart  = $data['time_start'];
-      $this->countMoves = $data['count_moves'];
+
+    foreach ($this->_importFields as $key) {
+      if (!isset($data[$key]))
+        return;
+
+      $this->$key = $data[$key];
     }
+
+    $this->_isInit = true;
   }
 
+  public function getData() {
+    $data = [];
+
+    foreach ($this->_importFields as $key) {
+      $data[$key] = $this->$key;
+    }
+    // TODO rewrite after
+    $data['status'] = $this->getStatus();
+    $data['countFreezes'] = $this->getCountFreezeMove();
+    $data['timePlay'] = $this->getTime();
+    return $data;
+  }
   /**
    * Start new game
    *
    * @return void
    */
-  public function start($difficulty = GAME_LEVEL_SIMPLE) {
+  public function start($difficulty = GAME_LEVEL_HARD) {
     $this->matrix = [];
     for ($i = 1; $i <= $this->matrixSize; $i++) {
-      $this->matrix[$i] = false;
+      $this->matrix[$i] = LS_OFF;
     }
 
     $this->difficulty = $difficulty;
     $this->timeStart  = time();
     $this->timeFinish = 0;
     $this->countMoves = 0;
-  }
 
+    // add random for start game
+    $this->matrix[rand(1,25)] = LS_ON;
+  }
 
   /**
    * Make new move in game
@@ -99,6 +128,22 @@ class ElectricGame {
       return $this->move((int) $value);
 
     return false;
+  }
+
+  /**
+   * Freeze 1 lamp to 1 move
+   *
+   * @param integer $value
+   */
+  public function doFreeze($value) {
+    if (!$this->isGameStart() || $this->isGameFinish() || ($this->getCountFreezeMove() <= 0))
+      return false;
+
+    if (!isset($this->arrFreezed[$value])) {
+      $this->arrFreezed[$value] = $this->matrix[$value];
+      $this->matrix[$value] += LS_FREEZED;
+      $this->countMoves += $this->costsMove['freeze'];
+    }
   }
 
   public function save($db, $name) {
@@ -118,6 +163,10 @@ class ElectricGame {
     return $this->matrix;
   }
 
+  public function getFreezed() {
+    return$this->arrFreezed;
+  }
+
   public function isGameStart() {
     return $this->timeStart > 0;
   }
@@ -127,7 +176,7 @@ class ElectricGame {
       return false;
 
     foreach ($this->matrix as $index => $value) {
-      if (!$value)
+      if ($value == LS_OFF)
         return false;
     }
 
@@ -170,6 +219,26 @@ class ElectricGame {
     $this->randomMagic = (bool) $val;
   }
 
+  public function getCostsMove() {
+    return $this->costsMove;
+  }
+
+  public function getCountFreezeMove() {
+    return $this->getLimitFreeze() - count($this->arrFreezed);
+  }
+
+  /**
+    * define('GAME_LEVEL_SIMPLE',   1); // 3 frrez
+ define('GAME_LEVEL_NORMAL',   2); // 2 freez
+ define('GAME_LEVEL_HARD',     3); // 1 freez
+   *
+   * @return int
+   */
+  public function getLimitFreeze() {
+    return (4 - $this->difficulty);
+  }
+
+
   /**
    * Do next move in game
    *
@@ -179,11 +248,13 @@ class ElectricGame {
   protected function move($move) {
     $res = $this->applyMoveToMatrix($move);
     if ($res) {
+      $this->unFreezeLamps();
+      $this->countMoves++;
+
       if ($this->isGameFinish()) {
         $this->timeFinish = time();
       } else {
         $this->applyMagicToMatrix($move);
-        $this->countMoves++;
       }
     }
 
@@ -197,16 +268,34 @@ class ElectricGame {
    * @return void
    */
   protected function applyMoveToMatrix($move) {
-    if ($this->matrix[$move])
+
+    if ($this->matrix[$move] != LS_OFF)
       return false;
 
     $arr = $this->gameFields[$move];
+
     foreach ($arr as $i) {
-      $this->matrix[$i] = !$this->matrix[$i];
+
+      if ($this->matrix[$i] == LS_ON) {
+        $this->matrix[$i] = LS_OFF;
+      } elseif ($this->matrix[$i] == LS_OFF) {
+        $this->matrix[$i] = LS_ON;
+      }
     }
-    $this->matrix[$move] = true;
+    $this->matrix[$move] = LS_ON;
 
     return true;
+  }
+
+  /**
+   * Unfreez all lamps
+   */
+  protected function unFreezeLamps() {
+    foreach ($this->arrFreezed as $num=>$val) {
+      $this->matrix[$num] = $val;
+    }
+
+    $this->arrFreezed = [];
   }
 
   /**
@@ -223,24 +312,25 @@ class ElectricGame {
     if ($index == $move)
       return;
     // addition logic: not apply for corners and to area aroud move
-    if (in_array($index, [1, 5, 21, 25]) || in_array($index, $this->gameFields[$move]))
+    // corners in_array($index, [1, 5, 21, 25]) || - to easy
+    if (in_array($index, $this->gameFields[$move]))
       return;
 
-    if ($this->needApplyChange() && $this->matrix[$index]) {
-      $this->matrix[$index] = false;
+    if ($this->needApplyChange() && $this->matrix[$index] == LS_ON ) {
+      $this->matrix[$index] = LS_OFF;
     }
   }
 
   /**
-   * Adding random behavior depending on the difficulty level
-   * level  low = 5%
-   *        normal = 10%
-   *        hard = 15%
+   * Random behavior depending on the difficulty level
+   * level  low =     25%
+   *        normal =  50%
+   *        hard =    75%
    */
-  protected function needApplyChange(){
+  protected function needApplyChange() {
 
     $res = rand(0, 100) < $this->difficulty * 25;
-    //echo('needApplyChange='.$res);
     return $res;
   }
+
 }

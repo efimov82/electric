@@ -18,8 +18,13 @@
 </nav>
 
 <div class="container">
-  <div id="game">
-    <div id="gameCells" class="container gameField">
+  <div class="row" id="game">
+    <div id="gameInfo" class="cell gameInfo">
+      Difficulty: <span id="difficultyLevel">none</span>,
+      Count FREEZE: <span id="countFreeze">0</span>,
+      Time: <span id="timePlay">0</span>
+    </div>
+    <div id="gameCells" class="cell gameField">
       <div class="row">
         <div id="cell-1" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 1)"></div>
         <div id="cell-2" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 2)"></div>
@@ -60,13 +65,20 @@
         <div id="cell-25" class="col-xs-1 gameCell" onclick="doMove(gameCounter, 25)"></div>
       </div>
 
-      <div>
+    <div>
       <div id="flip-counter" class="flip-counter"></div>
       </div>
       <button class="btn" onclick="newGame()">New game</button>
     </div>
+
+  <div class="cell" id="tools">
+    <div class="row">
+      <button id="btnModeNormal" class="btn" onclick="setMode(this, 'normal')">Normal mode</button>
+      <button id="btnModeFreeze" class="btn" onclick="setMode(this, 'freeze')">Freeze mode</button>
+    </div>
   </div>
-  </div>
+    </div>
+</div>
 
 
     <div id="modalSave" class="modal fade">
@@ -91,7 +103,5 @@
     </div>
   </div>
 </body>
-
-
 
 </html>
