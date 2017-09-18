@@ -19,7 +19,8 @@ if (!isset($_GET['action'])) {
   die('bag action');
 }
 
-random_int(0, 10000);
+// for PHP 7
+//random_int(0, 10000);
 
 $sesion = 'electric_game';
 if (isset($_SESSION[$sesion])) {
