@@ -25,7 +25,7 @@
       Time: <span id="timePlay">0</span>
     </div>
     <div id="gameCells" class="col-sm-10 gameField">
-      <?php include '_html/game_field.html'; ?>
+      <?php include '_html/game_field8x8.html'; ?>
       <div id="flip-counter" class="flip-counter"></div>
       <button class="btn" onclick="$('#modalNew').modal('show');">New game</button>
     </div>

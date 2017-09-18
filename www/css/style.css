@@ -11,6 +11,18 @@
   background-repeat: no-repeat;
 }
 
+.gameCell-md {
+  background-color: darkcyan;
+  border: 2 solid darkblue;
+  border-radius: 4px;
+  padding: 1px;
+  margin: 2px;
+  min-width: 70px;
+  height: 70px;
+  background-image: url('../img/lamp_off.png');
+  background-repeat: no-repeat;
+}
+
 .lightOn {
   background-image: url('../img/lamp.png');
   background-repeat: no-repeat;

@@ -1,7 +1,7 @@
 <?php
 
 namespace src;
-require __DIR__.'/AbstractGame.class.php';
+require_once __DIR__.'/AbstractGame.class.php';
 use AbstractGame;
 
 
@@ -12,6 +12,12 @@ use AbstractGame;
  */
 class ElectricGame5x5 extends AbstractGame {
 
+  /**
+   * Size matrix game 5x5
+   * @var integer
+   */
+  protected $matrixSize = 25;
+  
   protected $gameFields = [
       1  => [2, 6, 7],
       2  => [1, 6, 7, 8, 3],

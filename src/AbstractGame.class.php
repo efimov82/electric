@@ -30,10 +30,10 @@ class AbstractGame {
   protected $randomMagic = true;
 
   /**
-   * Size matrix game 5x5
+   * Size matrix game
    * @var integer
    */
-  protected $matrixSize = 25;
+  protected $matrixSize = 0;
   protected $matrix     = [];
   protected $gameFields = [];
 
@@ -82,7 +82,7 @@ class AbstractGame {
 
     // add random for start game
     if ($this->randomMagic)
-      $this->matrix[rand(1,25)] = LS_ON;
+      $this->matrix[rand(1,$this->matrixSize)] = LS_ON;
   }
 
   /**
@@ -292,7 +292,7 @@ class AbstractGame {
       return;
     // addition logic: not apply for corners and to area aroud move
     // corners in_array($index, [1, 5, 21, 25]) || - to easy
-    if (in_array($index, $this->gameFields[$move]))
+    if (in_array($index, $this->getLampAround($move)))
       return;
 
     if ($this->needApplyChange() && $this->matrix[$index] == LS_ON ) {
