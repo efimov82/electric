@@ -16,6 +16,8 @@ class ElectricGame8x8 extends AbstractGame {
    * @var integer
    */
   protected $matrixSize = 64;
+  protected $supportActions = ['move', 'freeze', 'start', 'save', 'vline', 'gline', 'cross', 'diagonal'];
+
 
   public function getLampAround($number) {
     if ($this->isItCorner($number)) {

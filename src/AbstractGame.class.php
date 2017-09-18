@@ -21,7 +21,7 @@ class AbstractGame {
   protected $costsMove = ['freeze'=>3];
   protected $arrFreezed = [];
 
-
+  protected $supportActions = ['move', 'freeze', 'start', 'save'];
   /**
    * Flag for add random change Lamp in game
    *
@@ -52,6 +52,17 @@ class AbstractGame {
     $this->_isInit = true;
   }
 
+  /*public function isActionSupport($action) {
+    return in_array($action, $this->supportActions);
+  }
+
+  public function doAction($action, $params) {
+    if (!$this->isActionSupport($action))
+      return;
+
+    $this->$action($params);
+  }*/
+
   public function getData() {
     $data = [];
 
@@ -67,15 +78,20 @@ class AbstractGame {
   /**
    * Start new game
    *
+   * $param array $params [$difficulty = GAME_LEVEL_NORMAL]
    * @return void
    */
-  public function start($difficulty = GAME_LEVEL_NORMAL) {
+  public function startAction($params = []) {
+
     $this->matrix = [];
     for ($i = 1; $i <= $this->matrixSize; $i++) {
       $this->matrix[$i] = LS_OFF;
     }
 
-    $this->difficulty = $difficulty;
+    // TODO chech const value
+    if (isset($params['value']) && (int)$params['value'])
+      $this->difficulty = (int)$params['value'];
+
     $this->timeStart  = time();
     $this->timeFinish = 0;
     $this->countMoves = 0;
@@ -91,12 +107,16 @@ class AbstractGame {
    * @param [type] $params
    * @return void
    */
-  public function doMove($value) {
+  public function moveAction($params) {
     if (!$this->isGameStart() || $this->isGameFinish())
       return false;
 
-    if ((int) $value > 0 && (int) $value <= $this->matrixSize)
-      return $this->move((int) $value);
+    if (!isset($params['value']) || !(int)$params['value'])
+      return false;
+
+    $val = (int) $params['value'];
+    if (($val > 0) && ($val <= $this->matrixSize))
+      return $this->_move($val);
 
     return false;
   }
@@ -106,30 +126,36 @@ class AbstractGame {
    *
    * @param integer $value
    */
-  public function doFreeze($value) {
+  public function freezeAction($params) {
     if (!$this->isGameStart() || $this->isGameFinish() || ($this->getCountFreezeMove() <= 0))
       return false;
 
-    if (!isset($this->arrFreezed[$value])) {
-      $this->arrFreezed[$value] = $this->matrix[$value];
-      $this->matrix[$value] += LS_FREEZED;
-      $this->countMoves += $this->costsMove['freeze'];
+    $val = (int) $params['value'];
+    if (($val > 0) && ($val <= $this->matrixSize)) {
+      if (!isset($this->arrFreezed[$val])) {
+        $this->arrFreezed[$val] = $this->matrix[$val];
+        $this->matrix[$val] += LS_FREEZED;
+        $this->countMoves += $this->costsMove['freeze'];
+      }
     }
   }
 
-  public function save($db, $name) {
+  public function saveAction($params) {
     if (!$this->isGameFinish())
       return false;
 
     $data['time']        = $this->getTime();
-    $data['name']        = htmlspecialchars($name);
-    $data['date_create'] = date('Y-m-d H:i:s', time());
+    $data['name']        = htmlspecialchars(isset($params['value']) ? $params['value'] : 'noname');
+    $data['date_create'] = date('Y-m-d H:i:s', time()-$data['time']);
     $data['scores']      = $this->getCountMoves();
     $data['level']       = $this->difficulty;
-    $db->insert(TBL_USERS_RESULTS, $data);
+    $this->db->insert(TBL_USERS_RESULTS, $data);
     return true;
   }
 
+  public function setDb($db) {
+    $this->db = $db;
+  }
   public function getMatrix() {
     return $this->matrix;
   }
@@ -216,7 +242,7 @@ class AbstractGame {
    * @param [integer] $move
    * @return bool
    */
-  protected function move($move) {
+  protected function _move($move) {
     $res = $this->applyMoveToMatrix($move);
     if ($res) {
       $this->unFreezeLamps();

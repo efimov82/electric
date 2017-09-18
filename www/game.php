@@ -33,10 +33,19 @@ if (isset($_SESSION[$sesion])) {
   $game->start(GAME_LEVEL_NORMAL);
 }
 
+$game->setDb($db);
+
 // $game->setRandomMagic(false);
 
+if (!isset($_GET['action']))
+  die('action is require');
 
-$action = $_GET['action'];
+$action = $_GET['action'] .'Action';
+if (method_exists($game, $action)) {
+  $game->$action($_GET);
+}
+
+/*
 switch ($action) {
   case 'start':
     if (isset($_GET['value']))
@@ -60,6 +69,8 @@ switch ($action) {
       $game->start();
     }
 }
+
+*/
 
 $_SESSION[$sesion] = $game->getData();
 
