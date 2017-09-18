@@ -12,8 +12,8 @@
 session_start();
 
 require_once "../bootstrap.php";
-include '../src/ElectricGame.class.php';
-use src\ElectricGame;
+include '../src/ElectricGame5x5.class.php';
+use src\ElectricGame5x5;
 
 if (!isset($_GET['action'])) {
   die('bag action');
@@ -24,9 +24,9 @@ if (!isset($_GET['action'])) {
 
 $sesion = 'electric_game';
 if (isset($_SESSION[$sesion])) {
-  $game = new ElectricGame($_SESSION[$sesion]);
+  $game = new ElectricGame5x5($_SESSION[$sesion]);
 } else {
-  $game = new ElectricGame([]);
+  $game = new ElectricGame5x5([]);
   $game->start(GAME_LEVEL_NORMAL);
 }
 

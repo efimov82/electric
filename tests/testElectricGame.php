@@ -5,9 +5,9 @@
  */
 
 require_once(dirname(__FILE__) . '/../simpletest/autorun.php');
-include __DIR__.'/../src/ElectricGame.class.php';
+include __DIR__.'/../src/ElectricGame5x5.class.php';
 
-use src\ElectricGame;
+use src\ElectricGame5x5;
 
 class TestElectricGame extends UnitTestCase {
 
@@ -16,20 +16,20 @@ class TestElectricGame extends UnitTestCase {
     //echo("\n on+freez=".(LS_ON + LS_FREEZED));
     //echo("\n off+freez=".(LS_OFF + LS_FREEZED));
 
-    $game = new ElectricGame([]);
+    $game = new ElectricGame5x5([]);
     $this->assertFalse($game->isGameStart());
   }
 
 
   function TestIsFinishForEmptyGame() {
-    $game = new ElectricGame([]);
+    $game = new ElectricGame5x5([]);
     $this->assertFalse($game->isGameFinish());
   }
 
 
 
   function TestStartNewGame() {
-    $game = new ElectricGame([]);
+    $game = new ElectricGame5x5([]);
     $game->setRandomMagic(false);
     $game->start();
 
@@ -65,7 +65,7 @@ class TestElectricGame extends UnitTestCase {
   }
 
   function TestMoveForEmptyGame() {
-    $game = new ElectricGame([]);
+    $game = new ElectricGame5x5([]);
 
     $game->doMove(1);
     $matrix = $game->getMatrix();
@@ -223,7 +223,7 @@ class TestElectricGame extends UnitTestCase {
    * @return ElectricGame
    */
   function _createTestGame($matrix = []) {
-    $game = new ElectricGame($matrix);
+    $game = new ElectricGame5x5($matrix);
     $game->setRandomMagic(false);
     $game->start();
 
