@@ -111,14 +111,26 @@ class AbstractGame {
     if (!$this->isGameStart() || $this->isGameFinish())
       return false;
 
-    if (!isset($params['value']) || !(int)$params['value'])
+    $val = $this->_getIntValue($params);
+    if (!$val || ($this->matrix[$val] != LS_OFF))
       return false;
 
-    $val = (int) $params['value'];
-    if (($val > 0) && ($val <= $this->matrixSize))
-      return $this->_move($val);
+    $arr = $this->getLampAround($val);
+    $this->_applyReverceTransform($val, $arr);
+    $this->countMoves++;
+    $this->afterAction($val);
 
-    return false;
+    return true;
+  }
+
+  protected function afterAction($move) {
+    $this->unFreezeLamps();
+
+    if ($this->isGameFinish()) {
+      $this->timeFinish = time();
+    } else {
+      $this->applyMagicToMatrix($move);
+    }
   }
 
   /**
@@ -130,14 +142,26 @@ class AbstractGame {
     if (!$this->isGameStart() || $this->isGameFinish() || ($this->getCountFreezeMove() <= 0))
       return false;
 
-    $val = (int) $params['value'];
-    if (($val > 0) && ($val <= $this->matrixSize)) {
-      if (!isset($this->arrFreezed[$val])) {
-        $this->arrFreezed[$val] = $this->matrix[$val];
-        $this->matrix[$val] += LS_FREEZED;
-        $this->countMoves += $this->costsMove['freeze'];
-      }
+    $val = $this->_getIntValue($params);
+    if ($val && !isset($this->arrFreezed[$val])) {
+      $this->arrFreezed[$val] = $this->matrix[$val];
+      $this->matrix[$val] += LS_FREEZED;
+      $this->countMoves += $this->costsMove['freeze'];
     }
+  }
+
+  /**
+   * Check isset value params, check Int and inside in Matrix
+   *
+   * @param mixed Int | false
+   */
+  protected function _getIntValue($params) {
+    if (!isset($params['value']) || !(int)$params['value'])
+      return false;
+
+    $val = (int)$params['value'];
+    if (($val > 0) && ($val <= $this->matrixSize))
+      return $val;
   }
 
   public function saveAction($params) {
@@ -243,17 +267,7 @@ class AbstractGame {
    * @return bool
    */
   protected function _move($move) {
-    $res = $this->applyMoveToMatrix($move);
-    if ($res) {
-      $this->unFreezeLamps();
-      $this->countMoves++;
 
-      if ($this->isGameFinish()) {
-        $this->timeFinish = time();
-      } else {
-        $this->applyMagicToMatrix($move);
-      }
-    }
 
     return $res;
   }
@@ -266,13 +280,16 @@ class AbstractGame {
    */
   protected function applyMoveToMatrix($move) {
 
-    if ($this->matrix[$move] != LS_OFF)
-      return false;
 
-    $arr = $this->getLampAround($move);
+  }
 
-    foreach ($arr as $i) {
-
+  /**
+   * Apply array lamps to matrix for revert value OFF -> ON, ON -> OFF
+   *
+   * @param type $lamps
+   */
+  protected function _applyReverceTransform($move, $lamps) {
+    foreach ($lamps as $i) {
       if ($this->matrix[$i] == LS_ON) {
         $this->matrix[$i] = LS_OFF;
       } elseif ($this->matrix[$i] == LS_OFF) {
@@ -280,8 +297,6 @@ class AbstractGame {
       }
     }
     $this->matrix[$move] = LS_ON;
-
-    return true;
   }
 
   /**

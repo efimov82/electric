@@ -17,7 +17,48 @@ class ElectricGame8x8 extends AbstractGame {
    */
   protected $matrixSize = 64;
   protected $supportActions = ['move', 'freeze', 'start', 'save', 'vline', 'gline', 'cross', 'diagonal'];
+  protected $costsMove = ['freeze'=>3, 'vline'=>4, 'gline'=>4, 'cross'=>8, 'diagonal'=>8];
+  /**
+   * Apply transform for vertical matrix line
+   *
+   * @param type $param
+   */
+  public function vlineAction($params) {
+    if (!$this->isGameStart() || $this->isGameFinish())
+      return false;
 
+    $val = $this->_getIntValue($params);
+    if (!$val || $this->matrix[$val] != LS_OFF)
+      return false;
+
+    $lamps = $this->_getLampsForVLine($val);
+    $this->_applyReverceTransform($val, $lamps);
+    $this->countMoves += $this->costsMove['vline'];
+    $this->afterAction($val);
+
+    return true;
+  }
+
+  public function glineAction($param) {
+
+  }
+
+  public function crossAction($param) {
+
+  }
+
+  public function diagonalAction($param) {
+
+  }
+
+  protected function _getLampsForVLine($val) {
+    $res = [];
+    for($i=1; $i <= $this->matrixSize; $i++) {
+      if (($i % 8) == ($val % 8))
+        $res[] = $i;
+    }
+    return $res;
+  }
 
   public function getLampAround($number) {
     if ($this->isItCorner($number)) {

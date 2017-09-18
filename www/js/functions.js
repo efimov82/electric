@@ -28,13 +28,15 @@ function newGame() {
 }
 
 function doMove(gameCounter, number) {
-  if (currentMode == 'freeze')
+  doRequest(currentMode, number);
+  /*if (currentMode == 'freeze')
     doRequest('freeze', number);
   else
     doRequest('move', number);
+  */
 }
    
-function setMode(button, mode) {
+function setMode(mode) {
   currentMode = mode;
   //button.disable = true;
 }   

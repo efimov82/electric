@@ -30,7 +30,7 @@ if (isset($_SESSION[$sesion])) {
   $game = new ElectricGame8x8($_SESSION[$sesion]);
 } else {
   $game = new ElectricGame8x8([]);
-  $game->start(GAME_LEVEL_NORMAL);
+  $game->startAction(['value'=>GAME_LEVEL_NORMAL]);
 }
 
 $game->setDb($db);

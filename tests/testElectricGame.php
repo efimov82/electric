@@ -12,10 +12,6 @@ use src\ElectricGame5x5;
 class TestElectricGame extends UnitTestCase {
 
   function TestIsNewGame() {
-
-    //echo("\n on+freez=".(LS_ON + LS_FREEZED));
-    //echo("\n off+freez=".(LS_OFF + LS_FREEZED));
-
     $game = new ElectricGame5x5([]);
     $this->assertFalse($game->isGameStart());
   }
@@ -31,7 +27,7 @@ class TestElectricGame extends UnitTestCase {
   function TestStartNewGame() {
     $game = new ElectricGame5x5([]);
     $game->setRandomMagic(false);
-    $game->start();
+    $game->startAction();
 
     $matrix = $game->getMatrix();
     $expect = [
@@ -49,17 +45,17 @@ class TestElectricGame extends UnitTestCase {
 
   function TestIsFinishForOpenGame() {
     $game = $this->_createTestGame();
-    $game->doMove(2);
+    $game->moveAction(['value'=>2]);
 
     $this->assertFalse($game->isGameFinish());
   }
 
   function TestIsFinishGame() {
     $game = $this->_createTestGame();
-    $game->doMove(7);
-    $game->doMove(22);
-    $game->doMove(10);
-    $game->doMove(25);
+    $game->moveAction(['value'=>7]);
+    $game->moveAction(['value'=>22]);
+    $game->moveAction(['value'=>10]);
+    $game->moveAction(['value'=>25]);
 
     $this->assertTrue($game->isGameFinish());
   }
@@ -67,7 +63,7 @@ class TestElectricGame extends UnitTestCase {
   function TestMoveForEmptyGame() {
     $game = new ElectricGame5x5([]);
 
-    $game->doMove(1);
+    $game->moveAction(1);
     $matrix = $game->getMatrix();
     $this->assertEqual($matrix, []);
   }
@@ -76,7 +72,7 @@ class TestElectricGame extends UnitTestCase {
   function TestMoveAtCorner() {
     $game = $this->_createTestGame();
 
-    $game->doMove(1);
+    $game->moveAction(['value'=>1]);
     $matrix = $game->getMatrix();
 
     $expect = [
@@ -95,8 +91,8 @@ class TestElectricGame extends UnitTestCase {
   function TestMoveAtAlreadyOnLamp() {
     $game = $this->_createTestGame();
 
-    $game->doMove(1);
-    $game->doMove(6);
+    $game->moveAction(['value'=>1]);
+    $game->moveAction(['value'=>6]);
     $matrix = $game->getMatrix();
     $expect = [
       1=>LS_ON,   2=>LS_ON,   3=>LS_OFF,   4=>LS_OFF,   5=>LS_OFF,
@@ -113,8 +109,8 @@ class TestElectricGame extends UnitTestCase {
   function TestMoveWithCrossLampsArea() {
     $game = $this->_createTestGame();
 
-    $game->doMove(7);
-    $game->doMove(14);
+    $game->moveAction(['value'=>7]);
+    $game->moveAction(['value'=>14]);
     $matrix = $game->getMatrix();
     $expect = [
       1=>LS_ON,   2=>LS_ON,   3=>LS_ON,    4=>LS_OFF,   5=>LS_OFF,
@@ -132,10 +128,10 @@ class TestElectricGame extends UnitTestCase {
   function TestMoveWithFinishGame() {
     $game = $this->_createTestGame();
 
-    $game->doMove(7);
-    $game->doMove(22);
-    $game->doMove(10);
-    $game->doMove(25);
+    $game->moveAction(['value'=>7]);
+    $game->moveAction(['value'=>22]);
+    $game->moveAction(['value'=>10]);
+    $game->moveAction(['value'=>25]);
 
     $matrix = $game->getMatrix();
     $expect = [
@@ -157,8 +153,8 @@ class TestElectricGame extends UnitTestCase {
   function TestFreezeSateOnLamp() {
     $game = $this->_createTestGame();
 
-    $game->doMove(2);
-    $game->doFreeze(7);
+    $game->moveAction(['value'=>2]);
+    $game->freezeAction(['value'=>7]);
 
     $matrix = $game->getMatrix();
     $expect = [
@@ -176,9 +172,10 @@ class TestElectricGame extends UnitTestCase {
   function TestFreezeOnFreezedLamp() {
     $game = $this->_createTestGame();
 
-    $game->doMove(2);
-    $game->doFreeze(7);
-    $game->doFreeze(7);
+    $game->moveAction(['value'=>2]);
+    $game->freezeAction(['value'=>7]);
+    $game->freezeAction(['value'=>7]);
+
 
     $matrix = $game->getMatrix();
     $expect = [
@@ -196,9 +193,9 @@ class TestElectricGame extends UnitTestCase {
   function TestFreezedLampOnNextMove() {
     $game = $this->_createTestGame();
 
-    $game->doMove(2);
-    $game->doFreeze(7);
-    $game->doMove(12);
+    $game->moveAction(['value'=>2]);
+    $game->freezeAction(['value'=>7]);
+    $game->moveAction(['value'=>12]);
 
     $matrix = $game->getMatrix();
     $expect = [
@@ -225,7 +222,7 @@ class TestElectricGame extends UnitTestCase {
   function _createTestGame($matrix = []) {
     $game = new ElectricGame5x5($matrix);
     $game->setRandomMagic(false);
-    $game->start();
+    $game->startAction();
 
     return $game;
   }

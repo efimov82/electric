@@ -33,8 +33,10 @@
     <div class="col-sm-2 toolsPanel" id="tools">
       <div class="row">
         <div>TOOLS</div>
-        <button id="btnModeNormal" class="btn" onclick="setMode(this, 'normal')">Normal mode</button>
-        <button id="btnModeFreeze" class="btn" onclick="setMode(this, 'freeze')">Freeze mode</button>
+        <button id="btnModeNormal" class="btn" onclick="setMode('move')">Normal mode</button>
+        <button id="btnModeFreeze" class="btn" onclick="setMode('freeze')">Freeze mode</button>
+        <button id="btnModeVline" class="btn" onclick="setMode('vline')">V-Line </button>
+        <button id="btnModeGline" class="btn" onclick="setMode('gline')">G-Line</button>
       </div>
     </div>
 
