@@ -15,6 +15,7 @@ class ElectricGame8x8 extends AbstractGame {
    * Size matrix game 8x8
    * @var integer
    */
+  protected $gameLabel = '8x8';
   protected $matrixSize = 64;
   protected $supportActions = ['move', 'freeze', 'start', 'save', 'vline', 'gline', 'cross', 'diagonal'];
   protected $costsMove = ['freeze'=>3, 'vline'=>4, 'gline'=>4, 'cross'=>8, 'diagonal'=>8];

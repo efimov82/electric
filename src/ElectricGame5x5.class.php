@@ -17,7 +17,7 @@ class ElectricGame5x5 extends AbstractGame {
    * @var integer
    */
   protected $matrixSize = 25;
-  
+  protected $gameLabel = '5x5';
 
   protected $gameFields = [
       1  => [2, 6, 7],

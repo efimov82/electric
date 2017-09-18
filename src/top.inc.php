@@ -10,7 +10,7 @@ require_once "../bootstrap.php";
 //use GameResult;
 
 $sql = "SELECT * FROM ".TBL_USERS_RESULTS."
-        ORDER BY scores ASC, time ASC, date_create DESC
+        ORDER BY level DESC, scores ASC, time ASC, date_create DESC
         LIMIT 0, 10";
 $stmt = $db->query($sql);
 
@@ -21,6 +21,7 @@ while ($row = $stmt->fetch()) {
   $level = getLevelName($row['level']);
   $res .= "<tr>
           <td><strong>{$row['name']}</strong></td>
+          <td>{$row['game']}</td>
           <td>{$level}</td>
           <td>{$row['scores']}</td>
           <td>{$time}</td>

@@ -8,5 +8,8 @@ CREATE TABLE `users_results` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
-ALTER TABLE `electron`.`users_results` 
+ALTER TABLE `users_results` 
 ADD COLUMN `level` INT(1) NULL AFTER `time`;
+
+ALTER TABLE `users_results` 
+ADD COLUMN `game` VARCHAR(45) NULL AFTER `level`;

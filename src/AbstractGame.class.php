@@ -20,6 +20,7 @@ class AbstractGame {
   protected $difficulty = 1;
   protected $costsMove = ['freeze'=>3];
   protected $arrFreezed = [];
+  protected $gameLabel = '';
 
   protected $supportActions = ['move', 'freeze', 'start', 'save'];
   /**
@@ -52,16 +53,7 @@ class AbstractGame {
     $this->_isInit = true;
   }
 
-  /*public function isActionSupport($action) {
-    return in_array($action, $this->supportActions);
-  }
 
-  public function doAction($action, $params) {
-    if (!$this->isActionSupport($action))
-      return;
-
-    $this->$action($params);
-  }*/
 
   public function getData() {
     $data = [];
@@ -83,22 +75,26 @@ class AbstractGame {
    */
   public function startAction($params = []) {
 
-    $this->matrix = [];
-    for ($i = 1; $i <= $this->matrixSize; $i++) {
-      $this->matrix[$i] = LS_OFF;
-    }
+    $this->_init();
 
     // TODO chech const value
     if (isset($params['value']) && (int)$params['value'])
       $this->difficulty = (int)$params['value'];
 
-    $this->timeStart  = time();
-    $this->timeFinish = 0;
-    $this->countMoves = 0;
-
     // add random for start game
     if ($this->randomMagic)
       $this->matrix[rand(1,$this->matrixSize)] = LS_ON;
+  }
+
+  protected function _init() {
+    $this->matrix = [];
+    for ($i = 1; $i <= $this->matrixSize; $i++) {
+      $this->matrix[$i] = LS_OFF;
+    }
+
+    $this->timeStart  = time();
+    $this->timeFinish = 0;
+    $this->countMoves = 0;
   }
 
   /**
@@ -173,7 +169,10 @@ class AbstractGame {
     $data['date_create'] = date('Y-m-d H:i:s', time()-$data['time']);
     $data['scores']      = $this->getCountMoves();
     $data['level']       = $this->difficulty;
+    $data['game']        = $this->gameLabel;
     $this->db->insert(TBL_USERS_RESULTS, $data);
+    $this->_init();
+
     return true;
   }
 

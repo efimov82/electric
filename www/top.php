@@ -21,7 +21,8 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Name</th>
+          <th>Player</th>
+          <th>Game</th>
           <th>Level</th>
           <th>Count Moves</th>
           <th>Time</th>
