@@ -11,13 +11,13 @@
 
 
   <link href="css/style.css?v=3" rel="stylesheet">
-  <link href="css/style<?php echo $gameSize ?>.css?v=3" rel="stylesheet">
+  <link href="css/style<?php echo $gameSize ?>.css?v=4" rel="stylesheet">
   <script src="/js/jquery.min.js"></script>
   <script src="/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="/css/bootstrap.min.css">
 
   <!-- Latest compiled and minified JavaScript -->
-  <script src="/js/functions.js?v=3"></script>
+  <script src="/js/functions.js?v=4"></script>
   <!-- My flip counter script, REQUIRED -->
 	<script type="text/javascript" src="/js/flipcounter.min.js"></script>
 	<!-- Style sheet for the counter, REQUIRED -->
