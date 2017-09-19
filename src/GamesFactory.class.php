@@ -4,6 +4,7 @@ namespace src;
 
 use src\ElectricGame5x5;
 use src\ElectricGame8x8;
+use src\ElectricGame10x10;
 /*
  * Games factory
  */

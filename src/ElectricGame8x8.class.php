@@ -128,53 +128,63 @@ class ElectricGame8x8 extends AbstractGame {
   }
 
   protected function isItLeftCol($number) {
-    return $number % 8 == 1;
+    return $number % $this->matrixLen == 1;
   }
 
   protected function isItRightCol($number) {
-    return $number % 8 == 0;
+    return $number % $this->matrixLen == 0;
   }
 
   protected function isItFirsLine($number) {
-    return $number < 9;
+    return $number < ($this->matrixLen + 1);
   }
 
   protected function isItLastLine($number) {
-    return $number > 56;
+    return $number > ($this->matrixLen * ($this->matrixLen - 1));
   }
 
   protected function _getLampForCorner($number) {
     if ($number == 1) {
-      return [2,9,10];
+      return [2, $this->matrixLen + 1, $this->matrixLen + 2];//[2,9,10];
     }
-    if ($number == 8) {
-      return [7,15,16];
+    if ($number == $this->matrixLen) {
+      return [$this->matrixLen - 1, ($this->matrixLen * 2) - 1, $this->matrixLen * 2];
     }
-    if ($number == 57) {
-      return [49,50,58];
+    if ($number == ($this->matrixLen * ($this->matrixLen - 1) + 1) ) { // 57
+      return [$this->matrixLen * ($this->matrixLen - 2) + 1,
+          $this->matrixLen * ($this->matrixLen - 2) + 2,
+          $this->matrixLen * ($this->matrixLen - 1) + 2]; // 49,50,58
     }
-    if ($number == 64) {
-      return [55,56,63];
+    if ($number == $this->matrixLen * $this->matrixLen) {
+      return [$this->matrixLen * ($this->matrixLen-1) - 1,
+              $this->matrixLen * ($this->matrixLen-1),
+              $this->matrixLen * $this->matrixLen - 1]; // 55, 56, 63
     }
   }
 
   protected function _getLampForLeftCol($n) {
-    return [$n-8, $n-7, $n+1, $n+8, $n+9];
+    return [$n - $this->matrixLen, $n - $this->matrixLen + 1,
+        $n + 1, $n + $this->matrixLen, $n + $this->matrixLen + 1]; //[$n-8, $n-7, $n+1, $n+8, $n+9];
   }
 
   protected function  _getLampForRightCol($n) {
-    return [$n-9, $n-8, $n-1, $n+7, $n+8];
+    return [$n - $this->matrixLen - 1, $n - $this->matrixLen,
+        $n - 1, $n + $this->matrixLen - 1, $n + $this->matrixLen]; //[$n-9, $n-8, $n-1, $n+7, $n+8];
   }
 
   protected function getLampForFirstLine($n) {
-    return [$n-1, $n+1, $n+7, $n+8, $n+9];
+    return [$n - 1, $n + 1, $n + $this->matrixLen - 1,
+        $n + $this->matrixLen, $n + $this->matrixLen + 1];
   }
 
   protected function getLampForLastLine($n) {
-    return [$n-9, $n-8, $n-7, $n-1, $n+1];
+    return [$n - $this->matrixLen - 1, $n - $this->matrixLen,
+        $n - $this->matrixLen + 1, $n-1, $n+1]; // $n-9, $n-8, $n-7, $n-1, $n+1
   }
 
   protected function getLampForMiddle($n) {
-    return [$n-9, $n-8, $n-7, $n-1, $n+1, $n+7, $n+8, $n+9];
+    return [$n - $this->matrixLen - 1, $n - $this->matrixLen,
+        $n - $this->matrixLen + 1, $n-1, $n+1,
+        $n + $this->matrixLen - 1, $n + $this->matrixLen, $n + $this->matrixLen + 1]; // $n-9, $n-8, $n-7, $n-1, $n+1, $n+7, $n+8, $n+9
   }
 }

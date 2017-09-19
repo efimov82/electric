@@ -10,7 +10,7 @@ require_once "config/database.php";
 
 session_start();
 // for PHP 7
-random_int(0, 10000);
+random_int(0, 100000);
 
 $gameSizes = ['5x5', '8x8', '10x10'];
 

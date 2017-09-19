@@ -27,6 +27,18 @@
   background-repeat: no-repeat;
 }
 
+.gameCell-sm {
+  background-color: darkcyan;
+  border: 2 solid darkblue;
+  border-radius: 4px;
+  padding: 1px;
+  margin: 2px;
+  min-width: 45px;
+  height: 45px;
+  background-image: url('../img/lamp_off_sm.png');
+  background-repeat: no-repeat;
+}
+
 .textPage{
   font-size: 18px;
 }
