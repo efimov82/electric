@@ -12,11 +12,8 @@
 namespace src;
 
 require_once "../bootstrap.php";
-include '../src/ElectricGame5x5.class.php';
-include '../src/ElectricGame8x8.class.php';
 
-use src\ElectricGame5x5;
-use src\ElectricGame8x8;
+use src\GamesFactory;
 
 if (!isset($_GET['action'])) {
   die('bag action');

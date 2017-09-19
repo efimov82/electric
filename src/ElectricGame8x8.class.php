@@ -1,8 +1,7 @@
 <?php
 
 namespace src;
-require_once __DIR__.'/AbstractGame.class.php';
-use AbstractGame;
+use src\AbstractGame;
 
 /**
  * Class for game logic
@@ -122,7 +121,10 @@ class ElectricGame8x8 extends AbstractGame {
   }
 
   protected function isItCorner($number) {
-    return in_array($number, [1, 8, 57, 64]);
+    return in_array($number, [1,
+                              $this->matrixLen,
+                              ($this->matrixLen * ($this->matrixLen-1)) + 1,
+                              $this->matrixLen * $this->matrixLen]); // 1,8,57,64
   }
 
   protected function isItLeftCol($number) {

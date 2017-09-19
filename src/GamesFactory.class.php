@@ -1,6 +1,9 @@
 <?php
 
 namespace src;
+
+use src\ElectricGame5x5;
+use src\ElectricGame8x8;
 /*
  * Games factory
  */
@@ -16,14 +19,14 @@ class GamesFactory {
     //print_r($data);
     switch ($size) {
       case '8x8':
-        $game = new \src\ElectricGame8x8($sessionData);
+        $game = new ElectricGame8x8($sessionData);
         break;
       case '10x10':
-        $game = new \src\ElectricGame10x10($sessionData);
+        $game = new ElectricGame10x10($sessionData);
         break;
       case '5x5':
       default :
-        $game = new \src\ElectricGame5x5($sessionData);
+        $game = new ElectricGame5x5($sessionData);
     }
     return $game;
   }

@@ -1,4 +1,5 @@
 <?php
+namespace src;
 
 define('GAME_LEVEL_EASY',     1); // 3 freez
 define('GAME_LEVEL_NORMAL',   2); // 2 freez
@@ -8,6 +9,7 @@ define('GAME_LEVEL_HARD',     3); // 1 freez
 define('LS_OFF',      1);
 define('LS_ON',       2);
 define('LS_FREEZED',  4);
+
 
 /*
  * Game class

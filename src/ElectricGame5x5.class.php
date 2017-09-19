@@ -1,9 +1,7 @@
 <?php
 
 namespace src;
-require_once __DIR__.'/AbstractGame.class.php';
-use AbstractGame;
-
+use src\AbstractGame;
 
 /**
  * Class for game logic

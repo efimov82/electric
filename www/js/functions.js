@@ -8,6 +8,7 @@ $(function(){
     $('#timePlay').text(time);
   }, 1000);
   
+  
 });
 
 var audio = new Audio('/sounds/click.wav');
@@ -26,6 +27,8 @@ function newGame() {
   difficulty += '&game_size=' + $('#game-size').val();
   doRequest('start', difficulty);
   $('#modalNew').modal('hide');
+  
+  setMode('move');
   location.reload(true);
   //window.window.location = '';
 }
