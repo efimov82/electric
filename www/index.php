@@ -28,14 +28,14 @@ include '_html/header.php';
       <input type="hidden" id="timePlay" />
     </div>
 
-    <div id="gameCells" class="col-sm-9 gameField">
+    <div id="gameCells" class="col-sm-9">
       <?php include "_html/game_field{$gameSize}.html"; ?>
       <div id="flip-counter" class="flip-counter"></div>
       <button class="btn" onclick="$('#modalNew').modal('show');">New game</button>
     </div>
 
     <div class="col-sm-1" id="tools">
-      <div class="row">
+      <div class="row panelTools">
         <div>TOOLS</div>
           <?php include "_html/tools{$gameSize}.html"; ?>
       </div>

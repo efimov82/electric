@@ -7,6 +7,7 @@
   background-image: url('../img/lamp_sm.png');
   background-repeat: no-repeat;
   animation: showOnAnimation 1.5s ease-out normal;
+  background-color: #296062;
 }
 
 .lightOnFreezed {

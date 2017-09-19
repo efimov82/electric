@@ -1,10 +1,16 @@
 
 .game {
   max-width: 750px;
+  
 }
 
+.game-field {
+  border: 2px solid darkblue;
+}
+
+
 .gameCell {
-  background-color: darkcyan;
+  background-color: #008000;
   border: 2 solid darkblue;
   border-radius: 5px;
   padding: 2px;
@@ -16,8 +22,8 @@
 }
 
 .gameCell-md {
-  background-color: darkcyan;
-  border: 2 solid darkblue;
+  background-color: #ECECEC;
+  border: 1px solid #505050;
   border-radius: 4px;
   padding: 1px;
   margin: 2px;
@@ -43,17 +49,29 @@
   font-size: 18px;
 }
 
-.toolsPanel {
-  border: 1 solid darkblue;
-  border-radius: 5px;
-  padding: 2px; 
+.panelTools {
+   
+   width: 90px;
+   padding: 6px;
+   border-radius: 5px;
+   background-color: #ddddff;
 }
 
-.gameInfo {
-  background-color: #ccccff;
-  border: 1 solid darkblue;
+.panelTools button {
+  
   border-radius: 5px;
-  padding: 10px;
+  margin: 2px;
+  border: 1px solid #eeaaee;
+  
+}
+
+
+.gameInfo {
+  background-color: #ddddff;
+  border: 1px solid lightblue;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 10px;
   font-size: 16px;
 }
 
@@ -62,7 +80,12 @@
 }
 
 .info-block {
-  padding-right: 10px;
+  padding: 6px;
+  
+  margin-right: 10px;
+  border: 1px solid lightblue;
+  background-color: #eeeeee;
+  border-radius: 5px;
 }
 
 @keyframes showOnAnimation {
