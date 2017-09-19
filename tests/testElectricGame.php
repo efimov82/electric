@@ -5,7 +5,7 @@
  */
 
 require_once(dirname(__FILE__) . '/../simpletest/autorun.php');
-include __DIR__.'/../src/ElectricGame5x5.class.php';
+require_once __DIR__.'/../bootstrap.php';;
 
 use src\ElectricGame5x5;
 

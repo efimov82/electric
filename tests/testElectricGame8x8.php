@@ -5,9 +5,10 @@
  */
 
 require_once(dirname(__FILE__) . '/../simpletest/autorun.php');
-include __DIR__.'/../src/ElectricGame8x8.class.php';
+require_once __DIR__.'/../bootstrap.php';
 
 use src\ElectricGame8x8;
+
 
 class TestElectricGame8x8 extends UnitTestCase {
 
