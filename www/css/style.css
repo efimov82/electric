@@ -28,11 +28,25 @@
 }
 
 .toolsPanel {
+  border: 1 solid darkblue;
+  border-radius: 5px;
+  padding: 2px; 
+}
+
+.gameInfo {
   background-color: #ccccff;
   border: 1 solid darkblue;
   border-radius: 5px;
-  padding: 2px;
-  
+  padding: 10px;
+  font-size: 16px;
+}
+
+.gameInfo span {
+  font-weight: bold;
+}
+
+.info-block {
+  padding-right: 10px;
 }
 
 @keyframes showOnAnimation {

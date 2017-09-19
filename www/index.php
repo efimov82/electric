@@ -20,26 +20,28 @@ include '_html/header.php';
 </nav>
 
 <div class="container">
-  <div  id="game" class="cell">
-    <div id="gameInfo" class="gameInfo">
-      Difficulty: <span id="difficultyLevel">none</span>,
-      Count FREEZE: <span id="countFreeze">0</span>,
-      Time: <span id="timePlay">0</span>
+  <div class="row" id="game">
+    <div id="gameInfo" class="col-sm-12 gameInfo">
+      <div class="col-sm-2 info-block">Difficulty: <br/> <span id="difficultyLevel">none</span></div>
+      <div class="col-sm-2 info-block">Freezes: <br/> <span id="countFreeze">0</span></div>
+      <div class="col-sm-2 info-block">Play time: <br/> <span id="timePlaySpan">00:00</span></div>
+      <input type="hidden" id="timePlay" />
     </div>
-    <div id="gameCells" class="col-sm-10 gameField">
+
+    <div id="gameCells" class="col-sm-9 gameField">
       <?php include "_html/game_field{$gameSize}.html"; ?>
       <div id="flip-counter" class="flip-counter"></div>
       <button class="btn" onclick="$('#modalNew').modal('show');">New game</button>
     </div>
 
-    <div class="col-sm-2 toolsPanel" id="tools">
+    <div class="col-sm-1" id="tools">
       <div class="row">
         <div>TOOLS</div>
           <?php include "_html/tools{$gameSize}.html"; ?>
       </div>
     </div>
 
-  </div>
+
 </div>
 
     <!-- save game -->

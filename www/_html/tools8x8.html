@@ -1,5 +1,19 @@
-<button id="btnModeNormal" class="btn" onclick="setMode('move')"><img src="/img/lamp.png" height="50" width="50" /></button>
-<button id="btnModeFreeze" class="btn" onclick="setMode('freeze')"><img src="/img/lamp_freezed.png" height="50" width="50"></button>
-<button id="btnModeVline" class="btn" onclick="setMode('vline')"><img src="/img/tools_vline.png" height="50" width="50"></button>
-<button id="btnModeGline" class="btn" onclick="setMode('gline')"><img src="/img/tools_gline.png" height="50" width="50"></button>
-<button id="btnModeCross" class="btn" onclick="setMode('cross')"><img src="/img/tools_cross.png" height="50" width="50"></button>
+<button id="btnModeNormal" class="btn" onclick="setMode('move')" data-toggle="tooltip" title="Reverse around">
+  <img src="/img/lamp.png" height="50" width="50" />
+</button>
+
+<button id="btnModeFreeze" class="btn" onclick="setMode('freeze')" data-toggle="tooltip" title="Freeze">
+  <img src="/img/lamp_freezed.png" height="50" width="50">
+</button>
+
+<button id="btnModeVline" class="btn" onclick="setMode('vline')" data-toggle="tooltip" title="Vertical Reverse">
+  <img src="/img/tools_vline.png" height="50" width="50">
+</button>
+
+<button id="btnModeGline" class="btn" onclick="setMode('gline')" data-toggle="tooltip" title="Horizontal Reverse">
+  <img src="/img/tools_gline.png" height="50" width="50">
+</button>
+
+<button id="btnModeCross" class="btn" onclick="setMode('cross')" data-toggle="tooltip" title="Cross Reverse">
+  <img src="/img/tools_cross.png" height="50" width="50">
+</button>

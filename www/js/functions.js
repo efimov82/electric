@@ -4,11 +4,15 @@ $(function(){
   
   
   setInterval(function () {
+    
     time = parseInt($('#timePlay').text()) + 1;
     $('#timePlay').text(time);
+    $('#timePlaySpan').text(secondsToHms(time));
   }, 1000);
   
   setMode(currentMode);
+  
+  $('[data-toggle="tooltip"]').tooltip();
 });
 
 var audio = new Audio('/sounds/click.wav');
@@ -141,4 +145,15 @@ function saveWinner() {
   var name = $('#player_name').val();
   doRequest('save', name);
   document.location = '/top.php';
+}
+
+
+function secondsToHms(d) {
+    d = Number(d);
+
+    var h = Math.floor(d / 3600);
+    var m = Math.floor(d % 3600 / 60);
+    var s = Math.floor(d % 3600 % 60);
+
+    return ('0' + h).slice(-2) + ":" + ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
 }
