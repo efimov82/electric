@@ -22,9 +22,11 @@ var DIFFICULTYS = {1:'EASY', 2:'NORMAL', 3:'HARD'};
 
 function newGame() {
   
-  var diff = $('#game-difficulty').val();
-  doRequest('start', diff);
+  var difficulty = $('#game-difficulty').val();
+  difficulty += '&game_size=' + $('#game-size').val();
+  doRequest('start', difficulty);
   $('#modalNew').modal('hide');
+  window.window.location = '';
 }
 
 function doMove(gameCounter, number) {
@@ -44,7 +46,7 @@ function setMode(mode) {
 function doRequest(action, value='') {
   
   $.ajax({
-    url: '/game.php?v=2&action='+action+'&value='+value,
+    url: '/game.php?action='+action+'&value='+value,
   }).done(( responce ) => {
     var data = JSON.parse(responce);
     

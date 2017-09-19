@@ -18,9 +18,10 @@ class AbstractGame {
   protected $timeFinish = 0;
   protected $countMoves = 0;
   protected $difficulty = 1;
-  protected $costsMove = ['freeze'=>3];
+  protected $costsMove  = ['freeze'=>3];
   protected $arrFreezed = [];
-  protected $gameLabel = '';
+  protected $gameLabel  = '';
+  protected $gameSize   = '';
 
   protected $supportActions = ['move', 'freeze', 'start', 'save'];
   /**
@@ -65,6 +66,7 @@ class AbstractGame {
     $data['status'] = $this->getStatus();
     $data['countFreezes'] = $this->getCountFreezeMove();
     $data['timePlay'] = $this->getTime();
+    $data['game_size'] = $this->gameSize;
     return $data;
   }
   /**

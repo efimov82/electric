@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+include '_html/header.html';
+include_once '../bootstrap.php';
 
-  <?php include '_html/header.html'; ?>
+?>
 <body>
 
   <nav class="navbar navbar-default">
@@ -25,7 +28,7 @@
       Time: <span id="timePlay">0</span>
     </div>
     <div id="gameCells" class="col-sm-10 gameField">
-      <?php include '_html/game_field8x8.html'; ?>
+      <?php include "_html/game_field{$gameSize}.html"; ?>
       <div id="flip-counter" class="flip-counter"></div>
       <button class="btn" onclick="$('#modalNew').modal('show');">New game</button>
     </div>
@@ -33,10 +36,7 @@
     <div class="col-sm-2 toolsPanel" id="tools">
       <div class="row">
         <div>TOOLS</div>
-        <button id="btnModeNormal" class="btn" onclick="setMode('move')">Normal mode</button>
-        <button id="btnModeFreeze" class="btn" onclick="setMode('freeze')">Freeze mode</button>
-        <button id="btnModeVline" class="btn" onclick="setMode('vline')">V-Line </button>
-        <button id="btnModeGline" class="btn" onclick="setMode('gline')">G-Line</button>
+          <?php include "_html/tools{$gameSize}.html"; ?>
       </div>
     </div>
 
@@ -79,12 +79,19 @@
 
         <div class="modal-body">
           <p>Choose level difficulty:
-          <select id="game-difficulty">
-            <option value="1">Easy</option>
-            <option value="2">Normal</option>
-            <option value="3">Hard</option>
-          </select>
-            </p>
+            <select id="game-difficulty">
+              <option value="1">Easy</option>
+              <option value="2">Normal</option>
+              <option value="3">Hard</option>
+            </select>
+          </p>
+          <p>Choose size game field:
+            <select id="game-size">
+              <option value="5x5">5x5</option>
+              <option value="8x8">8x8</option>
+              <option value="10x10">10x10</option>
+            </select>
+          </p>
           <div>
             <p><strong>Easy:</strong> You have 3 Freeze tool and simple gameplay.</p>
             <p><strong>Normal:</strong> You have 2 Freeze tool and medium gameplay.</p>
