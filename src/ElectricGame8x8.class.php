@@ -74,7 +74,7 @@ class ElectricGame8x8 extends AbstractGame {
   }
 
   public function diagonalAction($param) {
-
+    // TODO
   }
 
   protected function _getLampsForVLine($val) {

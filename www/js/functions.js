@@ -8,7 +8,7 @@ $(function(){
     $('#timePlay').text(time);
   }, 1000);
   
-  
+  setMode(currentMode);
 });
 
 var audio = new Audio('/sounds/click.wav');
@@ -44,7 +44,33 @@ function doMove(gameCounter, number) {
    
 function setMode(mode) {
   currentMode = mode;
-  //button.disable = true;
+  
+  var ids = ['btnModeNormal', 'btnModeFreeze', 'btnModeVline', 'btnModeGline', 'btnModeCross'];
+  ids.map( value => {
+    $("#"+value).prop('disabled', false);
+    $("#"+value).removeClass('btn-warning');
+  });
+  
+  if (mode == 'move') {
+    $("#btnModeNormal").addClass('btn-warning');
+  }
+  
+  if (mode == 'freeze') {
+    //$("#btnModeFreeze").prop('disabled', true);
+    $("#btnModeFreeze").addClass('btn-warning');
+  }
+  
+  if (mode == 'vline') {
+    $("#btnModeVline").addClass('btn-warning');
+  }
+  
+  if (mode == 'gline') {
+    $("#btnModeGline").addClass('btn-warning');
+  }
+  
+  if (mode == 'cross') {
+    $("#btnModeCross").addClass('btn-warning');
+  }
 }   
    
 function doRequest(action, value='') {
