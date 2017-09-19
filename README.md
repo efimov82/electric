@@ -17,6 +17,9 @@ Do so that all the light bulbs burn simultaneously for the minimum number of mov
 Live demo:
 http://electric.kapkap.info
 
+Next version:
+http://electric-dev.kapkap.info
+
 Install:
 
 Run command
