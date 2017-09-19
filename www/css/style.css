@@ -17,28 +17,10 @@
   border-radius: 4px;
   padding: 1px;
   margin: 2px;
-  min-width: 70px;
-  height: 70px;
-  background-image: url('../img/lamp_off.png');
+  min-width: 60px;
+  height: 60px;
+  background-image: url('../img/lamp_off_sm.png');
   background-repeat: no-repeat;
-}
-
-.lightOn {
-  background-image: url('../img/lamp.png');
-  background-repeat: no-repeat;
-  animation: showOnAnimation 1.5s ease-out normal;
-}
-
-.lightOnFreezed {
-  background-image: url('../img/lamp_freezed.png');
-  background-repeat: no-repeat;
-  animation: showOnAnimation 1.5s ease-out normal;
-}
-
-.lightOffFreezed {
-  background-image: url('../img/lamp_off_freezed.png');
-  background-repeat: no-repeat;
-  animation: showOnAnimation 1.5s ease-out normal;
 }
 
 .textPage{
