@@ -26,7 +26,8 @@ function newGame() {
   difficulty += '&game_size=' + $('#game-size').val();
   doRequest('start', difficulty);
   $('#modalNew').modal('hide');
-  window.window.location = '';
+  location.reload(true);
+  //window.window.location = '';
 }
 
 function doMove(gameCounter, number) {
