@@ -44,7 +44,7 @@
 </nav>
 
 <div class="container">
-    <h2>Rules</h2>
+    <h2 style="text-align: center;">Rules</h2>
 
     <div class="textPage"><p>The game takes place on a field of 5x5 cells, where each cell represents a "light bulb".</p>
       <p>A light bulb can have two states: "On" or "Off". The "electrician" (i.e. the player)</p>

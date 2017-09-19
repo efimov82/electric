@@ -15,11 +15,14 @@ $sql = "SELECT * FROM ".TBL_USERS_RESULTS."
 $stmt = $db->query($sql);
 
 $res = '';
+$i = 0;
 while ($row = $stmt->fetch()) {
   $date = date('d-m-Y H:i', strtotime($row['date_create']));
   $time = date('i:s', $row['time']);
   $level = getLevelName($row['level']);
+  $i++;
   $res .= "<tr>
+          <td>{$i}</td>
           <td><strong>{$row['name']}</strong></td>
           <td>{$row['game']}</td>
           <td>{$level}</td>

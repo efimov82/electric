@@ -20,11 +20,11 @@ include '_html/header.php';
 </nav>
 
 <div class="container">
-  <div class="row" id="game">
-    <div id="gameInfo" class="col-sm-12 gameInfo">
-      <div class="col-sm-2 info-block">Difficulty: <br/> <span id="difficultyLevel">none</span></div>
-      <div class="col-sm-2 info-block">Freezes: <br/> <span id="countFreeze">0</span></div>
-      <div class="col-sm-2 info-block">Play time: <br/> <span id="timePlaySpan">00:00</span></div>
+  <div class="row game" id="game">
+    <div id="gameInfo" class="col-sm-8 gameInfo">
+      <div class="col-sm-3 info-block">Difficulty: <br/> <span id="difficultyLevel">none</span></div>
+      <div class="col-sm-3 info-block">Freezes: <br/> <span id="countFreeze">0</span></div>
+      <div class="col-sm-3 info-block">Play time: <br/> <span id="timePlaySpan">00:00</span></div>
       <input type="hidden" id="timePlay" />
     </div>
 
