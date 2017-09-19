@@ -25,11 +25,15 @@ function newGame() {
   
   var difficulty = $('#game-difficulty').val();
   difficulty += '&game_size=' + $('#game-size').val();
-  doRequest('start', difficulty);
-  $('#modalNew').modal('hide');
+  //doRequest('start', difficulty);
   
-  setMode('move');
-  location.reload(true);
+  $.ajax({
+    url: '/game.php?action=start&value='+difficulty
+  }).done(( responce ) => {
+    window.location.reload(true);
+  }
+  );
+  
   //window.window.location = '';
 }
 
@@ -73,7 +77,7 @@ function setMode(mode) {
   }
 }   
    
-function doRequest(action, value='') {
+function doRequest(action, value='', reload=false) {
   
   $.ajax({
     url: '/game.php?action='+action+'&value='+value,
@@ -95,6 +99,9 @@ function doRequest(action, value='') {
       $('#modalSave').modal('show');
     }
     
+    /*if (reload) {
+      location.reload(true);
+    }*/
   });
 }
    
