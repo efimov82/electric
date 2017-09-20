@@ -1,0 +1,7 @@
+#!/bin/bash
+BASEDIR=$(dirname $0)
+
+php "${BASEDIR}/testElectricGame.php"
+php "${BASEDIR}/testElectricGame8x8.php"
+
+

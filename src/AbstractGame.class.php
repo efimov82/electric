@@ -330,7 +330,7 @@ class AbstractGame {
     if (!$this->randomMagic)
       return;
 
-    $index = rand(1, $this->matrixSize);
+    $index = random_int(1, $this->matrixSize);
     // not apply for current move
     if ($index == $move)
       return;

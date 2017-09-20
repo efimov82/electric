@@ -48,17 +48,5 @@ php ./tests/testElectricGame.php
 
 TODO List:
 
-Add game helper tools:
-1. Freeze - can be apply to one light bulb. Frozen light bulb not change state in next one move.
+1. For tools V-Line, G-Line && Cross add check Freezen lamps when apply to game field.
 
-2. OFF - can be apply to one light bulb in state "On" without change states light bulbs around.
-
-Game play:
-
-Add different size of play fields
-
-Add variants of game fields with obstacles
-
-Add countdown timer and limit time for games
-
-Add difficult levels
