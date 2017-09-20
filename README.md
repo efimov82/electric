@@ -1,7 +1,7 @@
 # Electric
 Simple game "Electric"
 
-![Alt text](ts/game_play.png?raw=true "Game play")
+![Alt text](ts/elect_2.0.png?raw=true "Game play")
 
 Game rules:
 The game takes place on a field of 5x5 cells, where each cell represents a "light bulb".
@@ -16,6 +16,9 @@ Do so that all the light bulbs burn simultaneously for the minimum number of mov
 
 Live demo:
 http://electric.kapkap.info
+
+Next version:
+http://electric-dev.kapkap.info
 
 Install:
 
