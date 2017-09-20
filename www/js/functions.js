@@ -15,6 +15,25 @@ $(function(){
   $('[data-toggle="tooltip"]').tooltip();
 });
 
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyBhBcdpgel1KSeHT1GloeC88Lm1xP-ntPk",
+  authDomain: "electric-game.firebaseapp.com",
+  databaseURL: "https://electric-game.firebaseio.com",
+  projectId: "electric-game",
+  storageBucket: "electric-game.appspot.com",
+  messagingSenderId: "378243821019"
+};
+firebase.initializeApp(config);
+
+var gameRef = firebase.database().ref('games/1');
+
+gameRef.once('value').then(function(snapshot) {
+  //var email = snapshot.val().email;
+
+  console.log('val='+snapshot.val());
+});
+
 var audio = new Audio('/sounds/click.wav');
 var currentMode = 'move';
 // const
@@ -81,7 +100,7 @@ function setMode(mode) {
   }
 }   
    
-function doRequest(action, value='', reload=false) {
+function doRequest(action, value='') {
   
   $.ajax({
     url: '/game.php?action='+action+'&value='+value,
@@ -90,7 +109,6 @@ function doRequest(action, value='', reload=false) {
     
     renderGameField(data.matrix);
     renderGameInfo(data);
-    console.log('value='+value);
     
     if (window.gameCounter.getValue() !== data.countMoves) {
       gameCounter.add(1);
@@ -102,10 +120,6 @@ function doRequest(action, value='', reload=false) {
       $('#player_name').val(data.player_name);
       $('#modalSave').modal('show');
     }
-    
-    /*if (reload) {
-      location.reload(true);
-    }*/
   });
 }
    

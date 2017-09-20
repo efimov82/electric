@@ -20,7 +20,8 @@ include '_html/header.php';
 </nav>
 
 <div class="container">
-  <div class="row game" id="game">
+  <div class="row game" id="appGame">
+    {{message}}
     <div id="gameInfo" class="col-sm-8 gameInfo">
       <div class="col-sm-3 info-block">Difficulty: <br/> <span id="difficultyLevel">none</span></div>
       <div class="col-sm-3 info-block">Freezes: <br/> <span id="countFreeze">0</span></div>
@@ -40,8 +41,6 @@ include '_html/header.php';
           <?php include "_html/tools{$gameSize}.html"; ?>
       </div>
     </div>
-
-
 </div>
 
     <!-- save game -->
@@ -108,5 +107,8 @@ include '_html/header.php';
   </div>
 
 </body>
+
+<script src="/js/appGame.js?v=1"></script>
+<script src="/js/functions.js?v=4"></script>
 
 </html>
