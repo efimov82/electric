@@ -9,51 +9,37 @@
 *   move [1-25] take new move
  *  save - save result game
  */
-session_start();
+namespace src;
 
 require_once "../bootstrap.php";
-include '../src/ElectricGame.class.php';
-use src\ElectricGame;
+
+use src\GamesFactory;
 
 if (!isset($_GET['action'])) {
   die('bag action');
 }
 
 
-$sesion = 'electric_game';
-$gameData = isset($_SESSION[$sesion]) ? $_SESSION[$sesion] : [];
+if (isset($_SESSION[$session_name])) {
+  $game = GamesFactory::create($_GET, $_SESSION[$session_name]);
+} else {
+  $game = GamesFactory::create($_GET, []);
+  // TODO refactoring later At front and remove
+  $game->startAction(['value'=>GAME_LEVEL_NORMAL]);
+}
 
-$game = new ElectricGame($gameData);
+$game->setDb($db);
+
 // $game->setRandomMagic(false);
 
-if (!isset($_SESSION[$sesion])) {
-  $game->start(GAME_LEVEL_SIMPLE);
+if (!isset($_GET['action']))
+  die('action is require');
+
+$action = $_GET['action'] .'Action';
+if (method_exists($game, $action)) {
+  $game->$action($_GET);
 }
 
-$action = $_GET['action'];
-switch ($action) {
-  case 'start':
-    $game->start();
-    break;
-  case 'move':
-    if (isset($_GET['value'])) {
-      $game->doMove($_GET['value']);
-    }
-    break;
-  case 'save':
-    if (isset($_GET['value'])) {
-      $game->save($db, $_GET['value']);
-      // save name for next win game
-      $gameData['player_name'] = $_GET['value'];
-      $game->start();
-    }
-}
+$_SESSION[$session_name] = $game->getData();
 
-$gameData['count_moves'] = $game->getCountMoves();
-$gameData['matrix'] = $game->getMatrix();
-$gameData['status'] = $game->getStatus();
-$gameData['time_start'] = $game->getTimeStart();
-
-$_SESSION[$sesion] = $gameData;
-
-echo (json_encode($gameData));
+echo (json_encode($game->getData()));

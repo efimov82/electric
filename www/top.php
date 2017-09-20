@@ -16,12 +16,15 @@
 </nav>
 
 <div class="container">
-    <h2>TOP 10</h2>
+  <h2 style="text-align: center;">TOP 10</h2>
 
-    <table class="table">
+    <table class="table table-hover table-striped">
       <thead>
         <tr>
-          <th>Name</th>
+          <th>#</th>
+          <th>Player</th>
+          <th>Game</th>
+          <th>Level</th>
           <th>Count Moves</th>
           <th>Time</th>
           <th>Date</th>
