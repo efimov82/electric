@@ -49,4 +49,6 @@ php ./tests/testElectricGame.php
 TODO List:
 
 1. For tools V-Line, G-Line && Cross add check Freezen lamps when apply to game field.
-
+2. Firebase add: savw data + online render game
+3. Add url link to current game
+4. Multy player: create game and play with friends
