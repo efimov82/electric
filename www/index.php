@@ -3,6 +3,7 @@
 <?php
 include_once '../bootstrap.php';
 include '_html/header.php';
+
 ?>
 <body>
 
@@ -21,7 +22,7 @@ include '_html/header.php';
 
 <div class="container">
   <div class="row game" id="appGame">
-    {{message}}
+    {{books}}
     <div id="gameInfo" class="col-sm-8 gameInfo">
       <div class="col-sm-3 info-block">Difficulty: <br/> <span id="difficultyLevel">none</span></div>
       <div class="col-sm-3 info-block">Freezes: <br/> <span id="countFreeze">0</span></div>

@@ -15,24 +15,13 @@ $(function(){
   $('[data-toggle="tooltip"]').tooltip();
 });
 
-// Initialize Firebase
-var config = {
-  apiKey: "AIzaSyBhBcdpgel1KSeHT1GloeC88Lm1xP-ntPk",
-  authDomain: "electric-game.firebaseapp.com",
-  databaseURL: "https://electric-game.firebaseio.com",
-  projectId: "electric-game",
-  storageBucket: "electric-game.appspot.com",
-  messagingSenderId: "378243821019"
-};
-firebase.initializeApp(config);
 
-var gameRef = firebase.database().ref('games/1');
-
+/*
 gameRef.once('value').then(function(snapshot) {
   //var email = snapshot.val().email;
 
   console.log('val='+snapshot.val());
-});
+});*/
 
 var audio = new Audio('/sounds/click.wav');
 var currentMode = 'move';
@@ -61,7 +50,7 @@ function newGame() {
 }
 
 function doMove(gameCounter, number) {
-  doRequest(currentMode, number);
+  doRequest(currentMode, number, key);
   /*if (currentMode == 'freeze')
     doRequest('freeze', number);
   else
@@ -100,10 +89,10 @@ function setMode(mode) {
   }
 }   
    
-function doRequest(action, value='') {
+function doRequest(action, value='', key='') {
   
   $.ajax({
-    url: '/game.php?action='+action+'&value='+value,
+    url: '/game2.php?key='+key+'&action='+action+'&value='+value,
   }).done(( responce ) => {
     var data = JSON.parse(responce);
     
@@ -124,7 +113,6 @@ function doRequest(action, value='') {
 }
    
 function renderGameField(data) {
-  
   var res = Object.keys(data).map((val) => {
     // clear cell
     var cellId = "#cell-"+val;
@@ -132,7 +120,7 @@ function renderGameField(data) {
     $(cellId).removeClass('lightOnFreezed');
     $(cellId).removeClass('lightOffFreezed');
     
-    
+
     if (data[val] == LS_ON) {
       $(cellId).addClass('lightOn');
     } else if (data[val] == LS_ON_FREEZED) {

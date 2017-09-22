@@ -12,7 +12,6 @@
 namespace src;
 
 require_once "../bootstrap.php";
-
 use src\GamesFactory;
 
 if (!isset($_GET['action'])) {

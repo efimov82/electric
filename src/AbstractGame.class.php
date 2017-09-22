@@ -41,17 +41,22 @@ class AbstractGame {
   protected $matrix     = [];
   protected $gameFields = [];
 
-  protected $_importFields = ['matrix', 'countMoves', 'arrFreezed', 'timeStart', 'difficulty'];
+  protected $_importFields = ['key', 'matrix', 'countMoves', 'arrFreezed', 'timeStart', 'difficulty'];
   protected $_isInit = false;
 
   function __construct($data = []) {
 
     foreach ($this->_importFields as $key) {
-      if (!isset($data[$key]))
-        return;
-
-      $this->$key = $data[$key];
+      if (!isset($data[$key])) {
+        // die("key=$key now found.");
+        // TODO fix problem with Empty field arrFreezed (don't save) from Firebase
+      }
+      else {
+        $this->$key = $data[$key];
+      }
     }
+
+    //if ($this->arrFreezed)
 
     $this->_isInit = true;
   }

@@ -12,8 +12,11 @@
   <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase-database.js"></script>
   <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
 
-  <script src="https://unpkg.com/vue"></script>
-  
+  <!-- Vue -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <!-- VueFire -->
+  <script src="https://unpkg.com/vuefire/dist/vuefire.js"></script>
+
   <link href="css/style.css?v=3" rel="stylesheet">
   <link href="css/style<?php echo $gameSize ?>.css?v=4" rel="stylesheet">
   <link href="/css/bootstrap.min.css" rel="stylesheet" >
@@ -21,7 +24,7 @@
   <script src="/js/jquery.min.js"></script>
   <script src="/js/bootstrap.min.js"></script>
 
-  
+
 
   <!-- My flip counter script, REQUIRED -->
 	<script type="text/javascript" src="/js/flipcounter.min.js"></script>

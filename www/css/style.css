@@ -10,8 +10,8 @@
 
 
 .gameCell {
-  background-color: #008000;
-  border: 2 solid darkblue;
+  background-color: #ECECEC;
+  border: 1px solid #505050;
   border-radius: 5px;
   padding: 2px;
   margin: 2px;
