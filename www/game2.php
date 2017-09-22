@@ -23,7 +23,6 @@ $database = $firebase->getDatabase();
 
 if ($_GET['action'] == 'start') { //  && 
   $key = substr(sha1(rand(1,10000)), 1, 5);
-  $row = [];
   // for create new game
   $row['key'] = $key;
 } elseif (isset($_GET['key'])) {

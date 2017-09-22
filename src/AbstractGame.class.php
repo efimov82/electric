@@ -24,6 +24,7 @@ class AbstractGame {
   protected $arrFreezed = [];
   protected $gameLabel  = '';
   protected $gameSize   = '';
+  protected $key        = '';
 
   protected $supportActions = ['move', 'freeze', 'start', 'save'];
   /**

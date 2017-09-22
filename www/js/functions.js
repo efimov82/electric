@@ -40,9 +40,11 @@ function newGame() {
   //doRequest('start', difficulty);
   
   $.ajax({
-    url: '/game.php?action=start&value='+difficulty
+    url: '/game2.php?action=start&value='+difficulty
   }).done(( responce ) => {
-    window.location.reload(true);
+    var data = JSON.parse(responce);
+    window.location.replace('/'+data['key']);
+    //window.location.reload(true);
   }
   );
   
@@ -94,6 +96,7 @@ function doRequest(action, value='', key='') {
   $.ajax({
     url: '/game2.php?key='+key+'&action='+action+'&value='+value,
   }).done(( responce ) => {
+    //console.log('responce='+responce);
     var data = JSON.parse(responce);
     
     renderGameField(data.matrix);
